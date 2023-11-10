@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { Textfit } from "react-textfit";
 import Typography from "@material-ui/core/Typography";
 
 export default function ContactPage() {
@@ -27,11 +28,11 @@ export default function ContactPage() {
   return (
     <div
       className="page-container"
-      style={{ textAlign: "center", color: "white" }}
+      style={{ textAlign: "center", color: "white" , display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
     >
-      <Typography variant="h2">
+      <Textfit mode="single" max={60} style={{ width: '80%' }}>
         Send us an email at gggggopher@gmail.com.
-      </Typography>
+      </Textfit>
       <br />
       <Link to="/" style={{ color: "white" }}>
         <Typography variant="h3">Back</Typography>
