@@ -6,41 +6,42 @@ import { Textfit } from 'react-textfit';
 
 export default function LandingPage() {
     return (
-        <div className="page-container" style={{ display: 'flex', flexDirection: 'column', textAlign: 'center', alignItems: 'center', justifyContent: 'center', color: 'white' , overflow: 'hidden', whiteSpace: 'nowrap' }}>
-            <Typography variant="h1">
+        <div className="page-container" style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            height: '100vh', // Full viewport height
+            color: 'white', 
+            overflow: 'hidden', 
+            whiteSpace: 'nowrap' 
+        }}>
+            {/* Title at the top center */}
+            <Typography variant="h1" style={{ alignSelf: 'center', marginTop: '20px' }}>
                 Glyder Games
             </Typography>
-            <br />
-            <br /> 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />            
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />            
-            <br />
-            <br />
-            <Textfit mode="single" max={60} style={{ width: '80%' }}>
-                We specialize in developing strategy and party games. More information to come soon!
-            </Textfit>
-            <br /> 
-            <Link to="/contact" style={{ color: 'white' }}>
-                <Typography variant="h3">
-                    Contact Us
-                </Typography>
-            </Link>
+
+            {/* Container for the rest of the content */}
+            <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                justifyContent: 'center', 
+                alignItems: 'center', // Center alignment for children
+                height: '100%', 
+                width: '100%' 
+            }}>
+                <div style={{ height: '50vh' }}></div> {/* Spacer div */}
+
+                {/* Centered Textfit content */}
+                <Textfit mode="single" max={60} style={{ width: '80%', textAlign: 'center' }}>
+                    We specialize in developing strategy and party games. More information to come soon!
+                </Textfit>
+                <br />
+                <Link to="/contact" style={{ color: 'white' }}>
+                    <Typography variant="h3">
+                        Contact Us
+                    </Typography>
+                </Link>
+            </div>
         </div>
-    )
+    );
 }

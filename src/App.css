@@ -50,6 +50,17 @@ body {
   background-image: url('./images/frame_8.png');
   background-repeat: repeat;
 }
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Adjust the opacity as needed */
+  z-index: -1;
+}
 /* 
 body {
   animation: frameAnimation 8s infinite;
