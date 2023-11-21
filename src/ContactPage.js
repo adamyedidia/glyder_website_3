@@ -31,7 +31,7 @@ export default function ContactPage() {
       style={{ textAlign: "center", color: "white" , display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
     >
       <Textfit mode="single" max={60} style={{ width: '80%' }}>
-        Send us an email at gggggopher@gmail.com.
+        Send us an email at glydergames1@gmail.com.
       </Textfit>
       <br />
       <Link to="/" style={{ color: "white" }}>
