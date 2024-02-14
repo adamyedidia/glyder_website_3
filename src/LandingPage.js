@@ -28,7 +28,7 @@ export default function LandingPage() {
         setValue(newValue);
     };
 
-    const isSmallScreen = useMediaQuery('(max-height:1000px)');
+    const isSmallScreen = useMediaQuery('(max-height:600px)');
 
     return (
         <div className="page-container" style={{ 

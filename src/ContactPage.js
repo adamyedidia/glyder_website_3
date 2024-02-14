@@ -28,7 +28,7 @@ export default function ContactPage() {
   const classes = useStyles();
   const [value, setValue] = useState(2);
 
-  const isSmallScreen = useMediaQuery('(max-height:1000px)');
+  const isSmallScreen = useMediaQuery('(max-height:600px)');
 
   const handleChange = (event, newValue) => {
       setValue(newValue);
