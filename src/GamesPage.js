@@ -34,7 +34,7 @@ export default function GamesPage() {
       setValue(newValue);
   };
 
-  const isSmallScreen = useMediaQuery('(max-height:1000px)');
+  const isSmallScreen = useMediaQuery('(max-height:600px)');
 
   useEffect(() => {
     document.title = "Contact";
