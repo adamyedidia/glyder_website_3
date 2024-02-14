@@ -77,9 +77,9 @@ export default function LandingPage() {
               className={classes.tabs} 
               variant="fullWidth" // Ensures tabs take up the full available width
             >
-                <Tab label="About Us" component={Link} to="/about" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
+                <Tab label="About Us" component={Link} to="/about" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }}/>
             </Tabs>
             
             {/* Title at the top center */}
