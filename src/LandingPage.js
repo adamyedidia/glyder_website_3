@@ -136,7 +136,7 @@ export default function LandingPage() {
                 {/* <div style={{ height: '5vh' }}></div> */}
 
                 <Typography style={{fontSize: isSmallScreen ? 20 : 25, ...(isSmallScreen ? {} : {maxWidth: '75%', minWidth: '25%'}), width: isSmallScreen ? '80vw' : '50vw'}}>
-                    We're a small indie game studio based in the Boston area; we're focused on building fun, innovative, and lightweighted games for mobile, web, and Steam.
+                    We're a small indie game studio based in the Boston area. We're focused on building fun, innovative, lightweight games for mobile, web, and Steam.
                     We aim to make simple and novel games that are best played with friends and family.
                 </Typography>
             </div>}

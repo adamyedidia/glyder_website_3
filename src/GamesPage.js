@@ -66,8 +66,8 @@ export default function GamesPage() {
             </Grid>}
             <Grid item>
                 <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
-                    Shibboleth is a word game in which you must discover who your teammates are by giving clever hints. You and your teammates have a shared word, as do your opponents, who have their own shared word. 
-                    Give clues about your word so your teammates you're with them. Find your team to win. Be careful, though—if your opponents discover your word, they can guess your word to steal your victory!
+                    Shibboleth is a word game in which you must discover who your teammates are by giving clever hints. You and your teammates have a secret, shared word, as do your opponents. 
+                    Give clues about your word so your teammates can find you, but be careful — if your opponents discover your word, they can guess your word to steal your victory!
                 </Typography>
             </Grid>
             <Grid item>
@@ -92,7 +92,7 @@ export default function GamesPage() {
         </Grid>}
         <Grid item>
           <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
-            Drawback Chess is a chess variant in which each player has a hidden drawback. You'll be hamstrung by your drawback, but so will your opponent! If you can deduce your opponent's drawback, you'll gain a powerful advantage over them.
+            Drawback Chess is a chess variant in which each player has a hidden drawback. You'll be hamstrung by your drawback, but so will your opponent! If you can deduce your opponent's drawback or build towards a position where yours is minimized, you'll gain an advantage over them.
             Some drawbacks are a lot tougher than others, but don't worry—every drawback has its own rating, so you can be sure that you're playing a fair game.
           </Typography>
         </Grid>

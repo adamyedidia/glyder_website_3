@@ -83,7 +83,7 @@ export default function ContactPage() {
       >
           <Grid item>
               <Typography style={{ textAlign: 'center', fontSize: isSmallScreen ? 20 : 40 }}>
-                  Please send us an email at <a href="mailto:glydergames1@gmail.com">glydergames1@gmail.com</a>! We are always looking for feedback on our existing games and suggestions for new ones. Also, if you are interested in working with us, we will be delighted to hear from you!
+                  Send us an email at <a href="mailto:glydergames1@gmail.com">glydergames1@gmail.com</a>! We are always looking for feedback on our existing games and suggestions for new ones.
               </Typography>
           </Grid>
       </Grid>
