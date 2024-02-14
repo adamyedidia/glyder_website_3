@@ -63,13 +63,13 @@ export default function GamesPage() {
                 <img src="/assets/shibboleth_screenshot.png" alt="Shibboleth screenshot" style={{ maxHeight: "50vh", height: "auto" }} />
             </Grid>}
             <Grid item>
-                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
+                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
                     Shibboleth is a word game in which you must discover who your teammates are by giving clever hints. You and your teammates have a shared word, as do your opponents, who have their own shared word. 
                     Give clues about your word so your teammates you're with them. Find your team to win. Be careful, though—if your opponents discover your word, they can guess your word to steal your victory!
                 </Typography>
             </Grid>
             <Grid item>
-                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 25, textAlign: 'center' }}>
+                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
                     <b>Play Shibboleth now on <a href="https://play.google.com/store/apps/details?id=glydergames.cipher.ios&hl=en_US&gl=US">Google Play</a>{' '}
                     and{' '}
                     <a href="https://apps.apple.com/us/app/shibboleth/id6472225686">App Store</a>!</b>
@@ -89,13 +89,13 @@ export default function GamesPage() {
           <img src="/assets/drawback_chess_screenshot.png" alt="Drawback Chess" style={{ maxHeight: "50vh", height: "auto" }} />
         </Grid>}
         <Grid item>
-          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
+          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
             Drawback Chess is a chess variant in which each player has a hidden drawback. You'll be hamstrung by your drawback, but so will your opponent! If you can deduce your opponent's drawback, you'll gain a powerful advantage over them.
             Some drawbacks are a lot tougher than others, but don't worry—every drawback has its own rating, so you can be sure that you're playing a fair game.
           </Typography>
         </Grid>
         <Grid item>
-          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 25, textAlign: 'center' }}>
+          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
             <b>Play <a href="https://www.drawbackchess.com/">Drawback Chess</a> now in your browser!{' '}</b>
           </Typography>
         </Grid>
