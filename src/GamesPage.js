@@ -34,7 +34,9 @@ export default function GamesPage() {
       setValue(newValue);
   };
 
-  const isSmallScreen = useMediaQuery('(max-height:600px)');
+  const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
+  const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
+  const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth;
 
   useEffect(() => {
     document.title = "Contact";
@@ -116,9 +118,9 @@ return (
             className={classes.tabs}
             variant="fullWidth" // Ensures tabs take up the full available width
         >
-            <Tab label="About Us" component={Link} to="/" className={classes.tab} />
-            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} />
-            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} />
+            <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
+            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
+            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
         </Tabs>
         <Grid container direction="row" justify="center" alignItems="center" spacing={10} style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Grid item container direction="column">

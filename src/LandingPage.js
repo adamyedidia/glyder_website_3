@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     tab: {
       minWidth: '33.33%', // Divide the width equally among 3 tabs
-      fontSize: '1.4rem', // Increase font size for better visibility
+      fontSize: '1.4rem',
     },
 }));
   
@@ -54,7 +54,9 @@ export default function LandingPage() {
         setClickedImage(null);
     };
 
-    const isSmallScreen = useMediaQuery('(max-height:600px)');
+    const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
+    const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
+    const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth;
 
     return (
         <div className="page-container" onClick={handleOutsideClick} style={{ 
@@ -75,9 +77,9 @@ export default function LandingPage() {
               className={classes.tabs} 
               variant="fullWidth" // Ensures tabs take up the full available width
             >
-                <Tab label="About Us" component={Link} to="/about" className={classes.tab} />
-                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} />
-                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} />
+                <Tab label="About Us" component={Link} to="/about" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
+                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
+                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
             </Tabs>
             
             {/* Title at the top center */}
@@ -85,7 +87,8 @@ export default function LandingPage() {
                 src="/assets/glyder_games.png" 
                 alt="Glyder Games Logo" 
                 style={{ 
-                    maxHeight: '30vh', // Adjusts to the size of the container
+                    maxHeight: '30vh',
+                    maxWidth: '80vw',
                     marginTop: '5vh' 
                 }} 
             />}
@@ -132,7 +135,7 @@ export default function LandingPage() {
             }}>
                 {/* <div style={{ height: '5vh' }}></div> */}
 
-                <Typography style={{fontSize: 25, maxWidth: '75%', minWidth: '25%', width: '50vw'}}>
+                <Typography style={{fontSize: isSmallScreen ? 20 : 25, ...(isSmallScreen ? {} : {maxWidth: '75%', minWidth: '25%'}), width: isSmallScreen ? '80vw' : '50vw'}}>
                     We're a small indie game studio based in the Boston area; we're focused on building fun, innovative, and lightweighted games for mobile, web, and Steam.
                     We aim to make simple and novel games that are best played with friends and family.
                 </Typography>

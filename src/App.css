@@ -53,13 +53,19 @@ body {
 
 body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.7); /* Adjust the opacity as needed */
   z-index: -1;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-image: url('./images/frame_8_small.png');
+  }
 }
 /* 
 body {

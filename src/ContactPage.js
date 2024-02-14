@@ -28,7 +28,9 @@ export default function ContactPage() {
   const classes = useStyles();
   const [value, setValue] = useState(2);
 
-  const isSmallScreen = useMediaQuery('(max-height:600px)');
+  const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
+  const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
+  const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth;
 
   const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -64,9 +66,9 @@ export default function ContactPage() {
         className={classes.tabs} 
         variant="fullWidth" // Ensures tabs take up the full available width
       >
-          <Tab label="About Us" component={Link} to="/" className={classes.tab} />
-          <Tab label="Our Games" component={Link} to="/games" className={classes.tab} />
-          <Tab label="Contact" component={Link} to="/contact" className={classes.tab} />
+          <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
+          <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
+          <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
       </Tabs>      
       <Grid 
           container 
@@ -80,7 +82,7 @@ export default function ContactPage() {
           }}
       >
           <Grid item>
-              <Typography style={{ textAlign: 'center', fontSize: isSmallScreen ? 30 : 40 }}>
+              <Typography style={{ textAlign: 'center', fontSize: isSmallScreen ? 20 : 40 }}>
                   Please send us an email at <a href="mailto:glydergames1@gmail.com">glydergames1@gmail.com</a>! We are always looking for feedback on our existing games and suggestions for new ones. Also, if you are interested in working with us, we will be delighted to hear from you!
               </Typography>
           </Grid>
