@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import ContactPage from './ContactPage';
 import PrivacyPage from './PrivacyPage';
+import GamesPage from './GamesPage';
 import './App.css';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/games" element={<GamesPage />} />
         {/* <Route path="/jobs" element={<JobsPage />} /> */}
       </Routes>
     </Router>
