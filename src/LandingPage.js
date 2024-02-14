@@ -44,18 +44,24 @@ export default function LandingPage() {
         setValue(newValue);
     };
 
-    const handleImageClick = (index) => {
+    const handleImageClick = (index, event) => {
+        event.stopPropagation();
         setClickedImage(index);
+    };
+
+    const handleOutsideClick = () => {
+        console.log("Clicked outside")
+        setClickedImage(null);
     };
 
     const isSmallScreen = useMediaQuery('(max-height:600px)');
 
     return (
-        <div className="page-container" style={{ 
+        <div className="page-container" onClick={handleOutsideClick} style={{ 
             display: 'flex', 
             flexDirection: 'column', 
             alignItems: 'center', 
-            justifyContent: 'center',
+            ...(clickedImage !== null ? {} : {justifyContent: 'center'}),
             height: '100vh',
             color: 'white', 
             overflow: 'hidden', 
@@ -75,74 +81,54 @@ export default function LandingPage() {
             </Tabs>
             
             {/* Title at the top center */}
-            <img 
+            {clickedImage === null && <img 
                 src="/assets/glyder_games.png" 
                 alt="Glyder Games Logo" 
                 style={{ 
                     maxHeight: '30vh', // Adjusts to the size of the container
                     marginTop: '5vh' 
                 }} 
-            />
+            />}
 
-            {isSmallScreen ? null : <Grid container justify="center" alignItems="center" spacing={5} style={{ height: '60vh', marginTop: "5vh" }}>
-                <Grid item>
-                    <img
-                        src="/assets/drawback_chess_screenshot.png"
-                        alt="Drawback Chess"
-                        style={{
-                            maxHeight: '25vh',
-                            maxWidth: '25vh',
-                            borderRadius: '10px',
-                            boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
-                        }}
-                    />
-                </Grid>
-                <Grid item>
-                    <img
-                        src="/assets/mystery_screenshot.png"
-                        alt="Mystery"
-                        style={{
-                            maxHeight: '25vh',
-                            maxWidth: '25vh',
-                            borderRadius: '10px',
-                            boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
-                        }}
-                    />
-                </Grid>
-                <Grid item>
-                    <img
-                        src="/assets/civlite_screenshot.png"
-                        alt="CivLite"
-                        style={{
-                            maxHeight: '25vh',
-                            maxWidth: '25vh',
-                            borderRadius: '10px',
-                            boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
-                        }}
-                    />
-                </Grid>
-                <Grid item>
-                    <img
-                        src="/assets/shibboleth_screenshot.png"
-                        alt="Shibboleth"
-                        style={{
-                            maxHeight: '25vh',
-                            maxWidth: '25vh',
-                            borderRadius: '10px',
-                            boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
-                        }}
-                    />
+            {isSmallScreen ? null : <Grid container justify="center" alignItems="center" spacing={5} style={{ height: '60vh', marginTop: clickedImage !== null ? "0vh" : "5vh", ...(clickedImage !== null ? {position: 'relative'} : {}) }}>
+                <Grid container justify="center" alignItems="center" spacing={5}>
+                    {["drawback_chess", "mystery", "civlite", "shibboleth"].map((game, index) => (
+                        <Grid item key={index}>
+                            <a href="#" onClick={(e) => handleImageClick(index, e)}>
+                                <img
+                                    src={`/assets/lowres_${game}_screenshot.jpeg`}
+                                    alt={game}
+                                    style={{
+                                        maxHeight: '25vh',
+                                        maxWidth: '25vh',
+                                        borderRadius: '10px',
+                                        boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
+                                    }}
+                                />
+                            </a>
+                        </Grid>
+                    ))}
                 </Grid>
             </Grid>}        
 
+            {/* Display higher-res image when clicked */}
+            {clickedImage !== null && (
+                <img
+                    src={`/assets/${["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}_screenshot.png`}
+                    alt={["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}
+                    style={{ height: '60vh', marginBottom: '5vh', marginTop: '5vh' }}
+                />
+            )}
+
             {/* Container for the rest of the content */}
-            <div style={{ 
+            {clickedImage === null && <div style={{ 
                 display: 'flex', 
                 flexDirection: 'column', 
                 justifyContent: 'center', 
                 alignItems: 'center', // Center alignment for children
                 height: '100%', 
-                width: '100%' 
+                width: '100%',
+                marginBottom: '10vh'
             }}>
                 {/* <div style={{ height: '5vh' }}></div> */}
 
@@ -150,7 +136,7 @@ export default function LandingPage() {
                     We're a small indie game studio based in the Boston area; we're focused on building fun, innovative, and lightweighted games for mobile, web, and Steam.
                     We aim to make simple and novel games that are best played with friends and family.
                 </Typography>
-            </div>
+            </div>}
         </div>
     );
 }
