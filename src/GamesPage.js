@@ -69,7 +69,7 @@ export default function GamesPage() {
                 </Typography>
             </Grid>
             <Grid item>
-                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
+                <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 18, textAlign: 'center' }}>
                     <b>Play Shibboleth now on <a href="https://play.google.com/store/apps/details?id=glydergames.cipher.ios&hl=en_US&gl=US">Google Play</a>{' '}
                     and{' '}
                     <a href="https://apps.apple.com/us/app/shibboleth/id6472225686">App Store</a>!</b>
@@ -95,7 +95,7 @@ export default function GamesPage() {
           </Typography>
         </Grid>
         <Grid item>
-          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 20, textAlign: 'center' }}>
+          <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 18, textAlign: 'center' }}>
             <b>Play <a href="https://www.drawbackchess.com/">Drawback Chess</a> now in your browser!{' '}</b>
           </Typography>
         </Grid>
@@ -104,39 +104,34 @@ export default function GamesPage() {
     )
   }
 
-  return (
+return (
     <div
-      className="page-container"
-      style={{ textAlign: "center", color: "white" , display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+        className="page-container"
+        style={{ textAlign: "center", color: "white", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '90vh' }}
     >
-      <Tabs 
-        value={value} 
-        onChange={handleChange} 
-        centered 
-        className={classes.tabs} 
-        variant="fullWidth" // Ensures tabs take up the full available width
-      >
-          <Tab label="About Us" component={Link} to="/" className={classes.tab} />
-          <Tab label="Our Games" component={Link} to="/games" className={classes.tab} />
-          <Tab label="Contact" component={Link} to="/contact" className={classes.tab} />
-      </Tabs>      
-      <Grid container direction="row" justify="center" alignItems="center" spacing={10}>
-        <Grid item container direction="column">
-          <Grid item>
-            <Typography variant="h2" style={{ marginBottom: "20px" }}>
-              Our Games
-            </Typography>
-          </Grid>
-          <Grid item container direction="row" justify="center" alignItems="center" spacing={10}>
-            <Grid item>
-              <ShibbolethComponent />
+        <Tabs
+            value={value}
+            onChange={handleChange}
+            centered
+            className={classes.tabs}
+            variant="fullWidth" // Ensures tabs take up the full available width
+        >
+            <Tab label="About Us" component={Link} to="/" className={classes.tab} />
+            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} />
+            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} />
+        </Tabs>
+        <Grid container direction="row" justify="center" alignItems="center" spacing={10} style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+            <Grid item container direction="column">
+                <Grid item container direction="row" justify="center" alignItems="center" spacing={10}>
+                    <Grid item>
+                        <ShibbolethComponent />
+                    </Grid>
+                    <Grid item>
+                        <DrawbackChessComponent />
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid item>
-              <DrawbackChessComponent />
-            </Grid>
-          </Grid>
         </Grid>
-      </Grid>
     </div>
-  );
+);
 }
