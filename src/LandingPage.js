@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
@@ -24,8 +24,28 @@ export default function LandingPage() {
     const classes = useStyles();
     const [value, setValue] = useState(0);
 
+    const [clickedImage, setClickedImage] = useState(null);
+
+    useEffect(() => {
+        // Preload higher-res images
+        const higherResImages = [
+            "/assets/mystery_screenshot.png",
+            "/assets/civlite_screenshot.png",
+            "/assets/drawback_chess_screenshot.png",
+            "/assets/shibboleth_screenshot.png"
+        ];
+        higherResImages.forEach((image) => {
+            const img = new Image();
+            img.src = image;
+        });
+    }, []);
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const handleImageClick = (index) => {
+        setClickedImage(index);
     };
 
     const isSmallScreen = useMediaQuery('(max-height:600px)');
@@ -64,14 +84,14 @@ export default function LandingPage() {
                 }} 
             />
 
-            {isSmallScreen ? null : <Grid container justify="center" alignItems="center" spacing={5} style={{ height: '60vh', marginTop: "10vh" }}>
+            {isSmallScreen ? null : <Grid container justify="center" alignItems="center" spacing={5} style={{ height: '60vh', marginTop: "5vh" }}>
                 <Grid item>
                     <img
                         src="/assets/drawback_chess_screenshot.png"
                         alt="Drawback Chess"
                         style={{
-                            maxHeight: '20vh',
-                            maxWidth: '20vh',
+                            maxHeight: '25vh',
+                            maxWidth: '25vh',
                             borderRadius: '10px',
                             boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
                         }}
@@ -82,8 +102,8 @@ export default function LandingPage() {
                         src="/assets/mystery_screenshot.png"
                         alt="Mystery"
                         style={{
-                            maxHeight: '20vh',
-                            maxWidth: '20vh',
+                            maxHeight: '25vh',
+                            maxWidth: '25vh',
                             borderRadius: '10px',
                             boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
                         }}
@@ -94,8 +114,8 @@ export default function LandingPage() {
                         src="/assets/civlite_screenshot.png"
                         alt="CivLite"
                         style={{
-                            maxHeight: '20vh',
-                            maxWidth: '20vh',
+                            maxHeight: '25vh',
+                            maxWidth: '25vh',
                             borderRadius: '10px',
                             boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
                         }}
@@ -106,8 +126,8 @@ export default function LandingPage() {
                         src="/assets/shibboleth_screenshot.png"
                         alt="Shibboleth"
                         style={{
-                            maxHeight: '20vh',
-                            maxWidth: '20vh',
+                            maxHeight: '25vh',
+                            maxWidth: '25vh',
                             borderRadius: '10px',
                             boxShadow: '0px 0px 10px 5px rgba(0, 0, 0, 0.5)',
                         }}
