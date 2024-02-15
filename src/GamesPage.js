@@ -62,7 +62,7 @@ export default function GamesPage() {
                 <img src="/assets/shibboleth.png" alt="Shibboleth" style={{ maxWidth: isSmallScreen ? "80vw" : "20vw", height: "auto" }} />
             </Grid>
             {!isSmallScreen && <Grid item>
-                <img src="/assets/shibboleth_screenshot.png" alt="Shibboleth screenshot" style={{ maxHeight: "50vh", height: "auto" }} />
+                <img src="/assets/lowres_shibboleth_screenshot.jpeg" alt="Shibboleth screenshot" style={{ maxHeight: "50vh", height: "auto" }} />
             </Grid>}
             <Grid item>
                 <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
@@ -88,7 +88,7 @@ export default function GamesPage() {
           <Typography style={{ fontFamily: 'Bungee Spice', textAlign: 'center', fontSize: isSmallScreen ? '3em' : '5em', marginBottom: '-0.2em', marginTop: '-30px'}}>DRAWBACK CHESS</Typography>
         </Grid>
         {!isSmallScreen && <Grid item>
-          <img src="/assets/drawback_chess_screenshot.png" alt="Drawback Chess" style={{ maxHeight: "50vh", height: "auto" }} />
+          <img src="/assets/lowres_drawback_chess_screenshot.jpeg" alt="Drawback Chess" style={{ maxHeight: "50vh", height: "auto" }} />
         </Grid>}
         <Grid item>
           <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
