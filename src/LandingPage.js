@@ -26,19 +26,19 @@ export default function LandingPage() {
 
     const [clickedImage, setClickedImage] = useState(null);
 
-    useEffect(() => {
-        // Preload higher-res images
-        const higherResImages = [
-            "/assets/mystery_screenshot.png",
-            "/assets/civlite_screenshot.png",
-            "/assets/drawback_chess_screenshot.png",
-            "/assets/shibboleth_screenshot.png"
-        ];
-        higherResImages.forEach((image) => {
-            const img = new Image();
-            img.src = image;
-        });
-    }, []);
+    // useEffect(() => {
+    //     // Preload higher-res images
+    //     const higherResImages = [
+    //         "/assets/mystery_screenshot.png",
+    //         "/assets/civlite_screenshot.png",
+    //         "/assets/drawback_chess_screenshot.png",
+    //         "/assets/shibboleth_screenshot.png"
+    //     ];
+    //     higherResImages.forEach((image) => {
+    //         const img = new Image();
+    //         img.src = image;
+    //     });
+    // }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -77,9 +77,9 @@ export default function LandingPage() {
               className={classes.tabs} 
               variant="fullWidth" // Ensures tabs take up the full available width
             >
-                <Tab label="About Us" component={Link} to="/about" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
+                <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }}/>
             </Tabs>
             
             {/* Title at the top center */}
@@ -117,7 +117,7 @@ export default function LandingPage() {
             {/* Display higher-res image when clicked */}
             {clickedImage !== null && (
                 <img
-                    src={`/assets/${["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}_screenshot.png`}
+                    src={`/assets/lowres_${["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}_screenshot.jpeg`}
                     alt={["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}
                     style={{ height: '60vh', marginBottom: '5vh', marginTop: '5vh' }}
                 />

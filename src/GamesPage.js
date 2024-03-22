@@ -59,10 +59,10 @@ export default function GamesPage() {
     return (
         <Grid container direction="column" spacing={2} alignItems="center">
             <Grid item>
-                <img src="/assets/shibboleth.png" alt="Shibboleth" style={{ maxWidth: isSmallScreen ? "40vw" : "20vw", height: "auto" }} />
+                <img src="/assets/shibboleth.png" alt="Shibboleth" style={{ maxWidth: isSmallScreen ? "80vw" : "20vw", height: "auto" }} />
             </Grid>
             {!isSmallScreen && <Grid item>
-                <img src="/assets/shibboleth_screenshot.png" alt="Shibboleth screenshot" style={{ maxHeight: "50vh", height: "auto" }} />
+                <img src="/assets/lowres_shibboleth_screenshot.jpeg" alt="Shibboleth screenshot" style={{ maxHeight: "50vh", height: "auto" }} />
             </Grid>}
             <Grid item>
                 <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
@@ -88,7 +88,7 @@ export default function GamesPage() {
           <Typography style={{ fontFamily: 'Bungee Spice', textAlign: 'center', fontSize: isSmallScreen ? '3em' : '5em', marginBottom: '-0.2em', marginTop: '-30px'}}>DRAWBACK CHESS</Typography>
         </Grid>
         {!isSmallScreen && <Grid item>
-          <img src="/assets/drawback_chess_screenshot.png" alt="Drawback Chess" style={{ maxHeight: "50vh", height: "auto" }} />
+          <img src="/assets/lowres_drawback_chess_screenshot.jpeg" alt="Drawback Chess" style={{ maxHeight: "50vh", height: "auto" }} />
         </Grid>}
         <Grid item>
           <Typography style={{ maxWidth: isSmallScreen ? '80vw' : '40vw', fontSize: 16, textAlign: 'center' }}>
@@ -118,9 +118,9 @@ return (
             className={classes.tabs}
             variant="fullWidth" // Ensures tabs take up the full available width
         >
-            <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }} />
-            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '1rem' : '1.4rem' }}/>
+            <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
+            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }}/>
         </Tabs>
         <Grid container direction="row" justify="center" alignItems="center" spacing={10} style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Grid item container direction="column">
