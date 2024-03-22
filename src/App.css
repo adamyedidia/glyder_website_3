@@ -62,6 +62,14 @@ body::before {
   z-index: -1;
 }
 
+.poker {
+  background-image: none !important;
+}
+
+.poker::before {
+  background: rgba(0, 0, 0, 0.8);
+}
+
 @media (max-width: 600px) {
   body {
     background-image: url('./images/frame_8_small.png');
