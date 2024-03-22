@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 const darkTheme = createTheme({
     palette: {
@@ -63,21 +64,54 @@ function newGame(setGameId, setGame, setSelectedCards) {
 
 function HowToPlayDialog({ open, handleClose }) {
     return (
-        <div>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>How to play</DialogTitle>
+        <ThemeProvider theme={darkTheme}>
+            <Dialog open={open} onClose={handleClose} PaperProps={{
+                style: { backgroundColor: 'black', minWidth: '50%' },
+            }}>
+                <DialogTitle style={{ color: 'white' }}>How to play</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <p>Click on cards to select them. Click "Deal" to see the dealer's cards and the best hand for the dealer.</p>
-                        <p>Click "New Game" to start a new game.</p>
+                    <DialogContentText style={{ color: 'white' }}>
+                        <p> Each turn, you request a subset of cards from the deck. The dealer deals cards until they deal a card that matches your subset, at which point you get that card, and they keep all other cards dealt this way.</p>
+                        <p> E.g. if you asked for any heart (aka your subset was all the hearts), you would always get a heart, and the dealer would get somewhere between no cards and all the non-heart cards, depending on the order of the deck.</p>
+                        <p> The game ends when you have 5 cards. If the dealer has less than 8 cards at this point, they draw up to 8 total cards, and then each player players their best 5 card poker hand. The dealer wins ties. </p>
+                        <h2> Some strategy tips </h2>
+                        <p> You can (and should) change the subset of cards you're asking for each turn. </p>
+                        <p> To give you somewhere to start, a reasonable (although not great) strategy is to ask for any card above an 8 on turn one, and then make a flush out of that suit. </p>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
+                    <Button style={{ color: 'white' }} onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </ThemeProvider>
     )
+}
+
+function Hotkeys({ }) {
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center'
+        }}>
+            <Typography style={{ color: 'white' }}>
+                <h3>Hotkeys</h3>
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    gap: '20px' // Adjust the spacing between items as necessary
+                }}>
+                    <div><b>U</b> - select all cards</div>
+                    <div><b>DHCS</b> - select all cards of a suit</div>
+                    <div><b>AKQJ[T0]98765432</b> - select all cards of a rank</div>
+                    <div><b>Alt plus AKQJ[T0]98765432</b> - select all cards of a rank or higher</div>
+                </div>
+            </Typography>
+        </div>
+    );
 }
 
 function Card({ suit, rank, dimensions, background, border }) {
@@ -122,7 +156,7 @@ let name_to_rank = {
     'Q': 12,
     'J': 11,
     '10': 10,
-    '9':  9,
+    '9': 9,
     '8': 8,
     '7': 7,
     '6': 6,
@@ -193,10 +227,28 @@ let hotkey_map = {
     'd': suit('D'),
     'h': suit('H'),
     'c': suit('C'),
-    's': suit('S'), 
+    's': suit('S'),
+    'u': suit('D').concat(suit('H')).concat(suit('C')).concat(suit('S')),
 }
 
-function PlayerCards({ cards, cardDimensions, dealerBestHand, dealerHandDescription, isDealer }) {
+let alt_hotkey_map = {
+    'a': rank('A'),
+    'k': rank('K').concat(rank('A')),
+    'q': rank('Q').concat(rank('K')).concat(rank('A')),
+    'j': rank('J').concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    't': rank('10').concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '0': rank('10').concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '9': rank('9').concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '8': rank('8').concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '7': rank('7').concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '6': rank('6').concat(rank('7')).concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '5': rank('5').concat(rank('6')).concat(rank('7')).concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '4': rank('4').concat(rank('5')).concat(rank('6')).concat(rank('7')).concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '3': rank('3').concat(rank('4')).concat(rank('5')).concat(rank('6')).concat(rank('7')).concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+    '2': rank('2').concat(rank('3')).concat(rank('4')).concat(rank('5')).concat(rank('6')).concat(rank('7')).concat(rank('8')).concat(rank('9')).concat(rank('10')).concat(rank('J')).concat(rank('Q')).concat(rank('K')).concat(rank('A')),
+}
+
+function PlayerCards({ cards, cardDimensions, dealerBestHand, handDescription, isDealer }) {
     if (!cards) {
         return null
     }
@@ -216,13 +268,15 @@ function PlayerCards({ cards, cardDimensions, dealerBestHand, dealerHandDescript
 
     const rows = chunkArray(cards, isDealer ? 13 : 5);
 
+    let headerText = (isDealer ? "Dealer" : "Player") + (handDescription ? " (" + handDescription + ")" : "")
+
     return (
-        <div style={{ marginLeft: '5px' , textAlign: 'center' }}>
-            {isDealer ? <h3 style={{ color: 'white' }}>Dealer {dealerHandDescription ? "(" + dealerHandDescription + ")" : ""} </h3> : <h3 style={{ color: 'white' }}>Player</h3>}
+        <div style={{ marginLeft: '5px', textAlign: 'center' }}>
+            <h2 style={{ color: 'white' }}>{headerText}</h2>
             {rows.map((row, rowIndex) => (
                 <div key={rowIndex} className="card-row" style={{ display: 'flex', marginBottom: '10px' }}>
                     {row.map((card, cardIndex) => (
-                        <Card key={cardIndex} dimensions={cardDimensions} suit={card.suit} rank={rank_to_name[card.rank]} border={isDealer ? 'red' : 'green' } background={isDealer && dealerBestHand.filter(c => c.suit === card.suit && c.rank === card.rank).length > 0 ? 'green' : null}/>
+                        <Card key={cardIndex} dimensions={cardDimensions} suit={card.suit} rank={rank_to_name[card.rank]} border={isDealer ? 'red' : 'green'} background={isDealer && dealerBestHand.filter(c => c.suit === card.suit && c.rank === card.rank).length > 0 ? 'green' : null} />
                     ))}
                 </div>
             ))}
@@ -264,7 +318,7 @@ function cardDimensions(windowWidth, windowHeight) {
 }
 
 function expectedDealerCardsText(game, selectedCards) {
-    if (!game) {
+    if (!game || game.message) {
         return ""
     }
     let cardsRemaining = 52 - (game.dealerCards.filter(card => card.suit !== '' && card.rank !== '').length + game.playerCards.filter(card => card.suit !== '' && card.rank !== '').length)
@@ -274,22 +328,22 @@ function expectedDealerCardsText(game, selectedCards) {
     return numSelected ? " (" + formattedExpected + ")" : ""
 }
 
-function Buttons({ gameId, setGameId, game, setGame, selectedCards, setSelectedCards, setHowToPlayOpen , highlightDealerBestHand, setHighlightDealerBestHand }) {
+function Buttons({ gameId, setGameId, game, setGame, selectedCards, setSelectedCards, setHowToPlayOpen, highlightDealerBestHand, setHighlightDealerBestHand }) {
     return (
-            <Grid container spacing={1}>
-                <Grid item>
-                    <Button color="primary" variant="contained" onClick={() => newGame(setGameId, setGame, setSelectedCards)}>New Game</Button>
-                </Grid>
-                <Grid item>
-                    <Button color="primary" variant="contained" onClick={() => setHowToPlayOpen(true)}>How to play</Button>
-                </Grid>
-                <Grid item>
-                    <Button color="primary" variant="contained" onClick={() => setHighlightDealerBestHand(!highlightDealerBestHand)}>{highlightDealerBestHand ? 'Hide ' : 'Show '} Dealer Best Hand</Button>
-                </Grid>
-                <Grid item>
-                    <Button style={{ minWidth: '200px' }} color="primary" variant="contained" onClick={() => dealCard({ gameId, selectedCards, setGame })}>{"Deal Card" + expectedDealerCardsText(game, selectedCards)}</Button>
-                </Grid>
+        <Grid container spacing={1}>
+            <Grid item>
+                <Button color="primary" variant="contained" onClick={() => newGame(setGameId, setGame, setSelectedCards)}>New Game</Button>
             </Grid>
+            <Grid item>
+                <Button color="primary" variant="contained" onClick={() => setHowToPlayOpen(true)}>How to play</Button>
+            </Grid>
+            <Grid item>
+                <Button color="primary" variant="contained" onClick={() => setHighlightDealerBestHand(!highlightDealerBestHand)}>{highlightDealerBestHand ? 'Hide ' : 'Show '} Dealer Best Hand</Button>
+            </Grid>
+            <Grid item>
+                <Button disabled={game.message} style={{ minWidth: '200px' }} color="primary" variant="contained" onClick={() => dealCard({ gameId, selectedCards, setGame })}>{"Deal Card" + expectedDealerCardsText(game, selectedCards)}</Button>
+            </Grid>
+        </Grid>
     )
 }
 
@@ -313,8 +367,14 @@ export default function PokerPage() {
 
     useEffect(() => {
         function handleKeyDown(e) {
-            if (hotkey_map[e.key.toLowerCase()]) {   
-                toggle(hotkey_map[e.key.toLowerCase()], selectedCards, setSelectedCards)
+            if (e.altKey) {
+                if (alt_hotkey_map[e.key.toLowerCase()]) {
+                    toggle(alt_hotkey_map[e.key.toLowerCase()], selectedCards, setSelectedCards)
+                }
+            } else {
+                if (hotkey_map[e.key.toLowerCase()]) {
+                    toggle(hotkey_map[e.key.toLowerCase()], selectedCards, setSelectedCards)
+                }
             }
         }
         window.addEventListener('keydown', handleKeyDown)
@@ -371,14 +431,16 @@ export default function PokerPage() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ margin: '10px', display: 'flex', justifyContent: 'center' }}>
-                <Buttons gameId={gameId} setGameId={setGameId} game={game} setGame={setGame} selectedCards={selectedCards} setSelectedCards={setSelectedCards} setHowToPlayOpen={setHowToPlayOpen} highlightDealerBestHand={highlightDealerBestHand} setHighlightDealerBestHand={setHighlightDealerBestHand}/>
+                <Buttons gameId={gameId} setGameId={setGameId} game={game} setGame={setGame} selectedCards={selectedCards} setSelectedCards={setSelectedCards} setHowToPlayOpen={setHowToPlayOpen} highlightDealerBestHand={highlightDealerBestHand} setHighlightDealerBestHand={setHighlightDealerBestHand} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <CardGrid game={game} selectedCards={selectedCards} setSelectedCards={setSelectedCards} calculateBackground={calculateBackground} cardDimensions={dimensions}/>
+                <CardGrid game={game} selectedCards={selectedCards} setSelectedCards={setSelectedCards} calculateBackground={calculateBackground} cardDimensions={dimensions} />
             </div>
-            <PlayerCards cardDimensions={dimensions} cards={game?.playerCards} />
-            <PlayerCards cardDimensions={dimensions} cards={game?.dealerCards} dealerHandDescription={game.dealerHandDescription} dealerBestHand={highlightDealerBestHand ? game.dealerHand : []} isDealer={true} />
-             <HowToPlayDialog open={howToPlayOpen} handleClose={() => setHowToPlayOpen(false)} />
-       </div>
+            {game.message && <h1 style={{ color: game.message === 'You win!' ? 'green' : game.message == 'You lose!' ? 'red' : 'white' }}>{game.message}</h1>}
+            <PlayerCards cardDimensions={dimensions} cards={game?.playerCards} handDescription={game.playerHandDescription} />
+            <PlayerCards cardDimensions={dimensions} cards={game?.dealerCards} handDescription={game.dealerHandDescription} dealerBestHand={highlightDealerBestHand ? game.dealerHand : []} isDealer={true} />
+            <Hotkeys />
+            <HowToPlayDialog open={howToPlayOpen} handleClose={() => setHowToPlayOpen(false)} />
+        </div>
     )
 }
