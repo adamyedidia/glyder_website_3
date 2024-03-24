@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
-import { Textfit } from 'react-textfit';
-import { Tabs, Tab, makeStyles, useMediaQuery } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
+import TabBar from './TabBar';
+import { useMediaQuery } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-    tabs: {
-      width: 'min(max(60%, 100vh), 100%)',
-      marginBottom: '20px',
-      position: 'relative',
-      zIndex: 1000,
-    },
-    tab: {
-      minWidth: '33.33%', // Divide the width equally among 3 tabs
-      fontSize: '1.4rem',
-    },
-}));
-  
 
 export default function LandingPage() {
-    const classes = useStyles();
-    const [value, setValue] = useState(0);
-
     const [clickedImage, setClickedImage] = useState(null);
 
     // useEffect(() => {
@@ -39,10 +22,6 @@ export default function LandingPage() {
     //         img.src = image;
     //     });
     // }, []);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     const handleImageClick = (index, event) => {
         event.stopPropagation();
@@ -69,20 +48,7 @@ export default function LandingPage() {
             overflow: 'hidden', 
             // whiteSpace: 'nowrap' 
         }}>
-            {/* Tabs at the top */}
-            <Tabs 
-              value={value} 
-              onChange={handleChange} 
-              centered 
-              className={classes.tabs} 
-              variant="fullWidth" // Ensures tabs take up the full available width
-            >
-                <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
-                <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
-                <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }}/>
-            </Tabs>
-            
-            {/* Title at the top center */}
+            <TabBar isSmallScreen={isSmallScreen} value={0}/>
             {clickedImage === null && <img 
                 src="/assets/glyder_games.png" 
                 alt="Glyder Games Logo" 

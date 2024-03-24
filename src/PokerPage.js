@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { fetchWrapper } from './Helpers'
 import { Grid } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+import { Link } from 'react-router-dom'
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -71,7 +72,7 @@ function HowToPlayDialog({ open, handleClose }) {
                 <DialogTitle style={{ color: 'white' }}>How to play</DialogTitle>
                 <DialogContent>
                     <DialogContentText style={{ color: 'white' }}>
-                        <p> Each turn, you request a subset of cards from the deck. The dealer deals cards until they deal a card that matches your subset, at which point you get that card, and they keep all other cards dealt this way.</p>
+                        <p> Each turn, you request a subset of cards from the deck. Click on cards to toggle whether they're selected. The dealer deals cards until they deal a card that matches your subset, at which point you get that card, and they keep all other cards dealt this way.</p>
                         <p> E.g. if you asked for any heart (aka your subset was all the hearts), you would always get a heart, and the dealer would get somewhere between no cards and all the non-heart cards, depending on the order of the deck.</p>
                         <p> The game ends when you have 5 cards. If the dealer has less than 8 cards at this point, they draw up to 8 total cards, and then each player players their best 5 card poker hand. The dealer wins ties. </p>
                         <h2> Some strategy tips </h2>
@@ -332,6 +333,9 @@ function Buttons({ gameId, setGameId, game, setGame, selectedCards, setSelectedC
     return (
         <Grid container spacing={1}>
             <Grid item>
+                <Button color="primary" variant="contained" component={Link} to="/arcade">Back to Arcade</Button>
+            </Grid>
+            <Grid item>
                 <Button color="primary" variant="contained" onClick={() => newGame(setGameId, setGame, setSelectedCards)}>New Game</Button>
             </Grid>
             <Grid item>
@@ -366,6 +370,13 @@ export default function PokerPage() {
     const [highlightDealerBestHand, setHighlightDealerBestHand] = useState(false);
 
     useEffect(() => {
+        if (!localStorage.getItem('poker-page')) {
+            setHowToPlayOpen(true)
+        }
+        localStorage.setItem('poker-page', 'true')
+    }, [])
+
+    useEffect(() => {
         function handleKeyDown(e) {
             if (e.altKey) {
                 if (alt_hotkey_map[e.key.toLowerCase()]) {
@@ -384,11 +395,11 @@ export default function PokerPage() {
     }, [gameId, selectedCards, setSelectedCards, setGame])
 
     useEffect(() => {
-        document.body.classList.add('poker');
+        document.body.classList.add('game');
         setLoading(false);
 
         return () => {
-            document.body.classList.remove('poker');
+            document.body.classList.remove('game');
         };
     }, []);
 

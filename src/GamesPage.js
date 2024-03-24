@@ -1,38 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
 
-import { Tabs, Tab, makeStyles, useMediaQuery } from '@material-ui/core';
+import TabBar from "./TabBar";
+import { useMediaQuery } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 
 import './GamesPage.css'
 
-
-const useStyles = makeStyles((theme) => ({
-  tabs: {
-    width: 'min(max(60%, 100vh), 100%)',
-    marginBottom: '20px',
-    position: 'relative',
-    zIndex: 1000,
-  },
-  tab: {
-    minWidth: '33.33%', // Divide the width equally among 3 tabs
-    fontSize: '1.4rem', // Increase font size for better visibility
-  },
-}));
-
-
 export default function GamesPage() {
   let navigate = useNavigate();
   let oldTitle = document.title;
-
-  const classes = useStyles();
-  const [value, setValue] = useState(1);
-
-  const handleChange = (event, newValue) => {
-      setValue(newValue);
-  };
 
   const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
   const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
@@ -111,17 +90,7 @@ return (
         className="page-container"
         style={{ textAlign: "center", color: "white", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '90vh' }}
     >
-        <Tabs
-            value={value}
-            onChange={handleChange}
-            centered
-            className={classes.tabs}
-            variant="fullWidth" // Ensures tabs take up the full available width
-        >
-            <Tab label="About Us" component={Link} to="/" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
-            <Tab label="Our Games" component={Link} to="/games" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }} />
-            <Tab label="Contact" component={Link} to="/contact" className={classes.tab} style={{ fontSize: isSmallScreen ? '0.9rem' : '1.4rem' }}/>
-        </Tabs>
+      <TabBar isSmallScreen={isSmallScreen} value={1}/>
         <Grid container direction="row" justify="center" alignItems="center" spacing={10} style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Grid item container direction="column">
                 <Grid item container direction="row" justify="center" alignItems="center" spacing={10}>

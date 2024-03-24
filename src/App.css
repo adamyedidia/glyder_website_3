@@ -62,11 +62,11 @@ body::before {
   z-index: -1;
 }
 
-.poker {
+.game {
   background-image: none !important;
 }
 
-.poker::before {
+.game::before {
   background: rgba(0, 0, 0, 0.8);
 }
 
