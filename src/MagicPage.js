@@ -437,6 +437,12 @@ export default function MagicPage() {
         'f': 'flavorText'
     }
 
+    useEffect(() => {
+        if (!localStorage.getItem('magic')) {
+            setHowToPlayOpen(true);
+        }
+    }, [])
+
 
     useEffect(() => {
         const handleKeyDown = (event) => {
