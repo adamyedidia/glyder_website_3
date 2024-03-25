@@ -37,7 +37,7 @@ function HowToPlayDialog({ open, handleClose }) {
                         <p> For each category, there are exactly four cards that match perfectly. Each card belongs to exactly one such set. You win when you correctly submit 3 out of the 4 sets (since the last one is trivial at that point). </p>
                         <p> You can purchase various facts about the cards by clicking the buttons that say things like 'Rules Text - 3' and 'Mana Cost - 3'. The point cost comes after the hyphen. </p>
                         <p> You can submit a guess for a four card set by clicking on four cards and then clicking the button corresponding to the property you think they share. Corret guesses are free and incorrect guesses cost 5 points. </p>
-                        <p> Matches must always be exactly. For example, 'Artifact Creature', 'Legendary Creature', and 'Creature' are not the same type for the purposes of type. </p>
+                        <p> Matches must always be exactly. For example, 'Artifact Creature', 'Legendary Creature', and 'Creature' are not the same type for the purposes of type, and 'Human Warrior' and 'Human' are not the same for the purposes of subtype. A creature with a toughness of * is different than one with a toughness of 0. 'Type' is everything before the hyphen, and subtype is everything after. </p>
                         <p> Each category has a single correct answer - for example, if 'Rarity' is a category, there is exactly one rarity that has exactly 4 cards that match it. If there is a rarity with 5 cards that match it, it cannot be that a subset of those 5 cards is the correct rarity. </p>
                         <p> Once you get the hang of it, I recommend playing with a timer. </p>
                     </DialogContentText>
@@ -236,7 +236,7 @@ function CardGrid({ cards, visibilities, dimensions, selected, setSelected, comp
     )
 }
 
-function Buttons({ game, setGame, showHotkeys, setShowHotkeys, selected, setSelected, refresh, submit, costs, costDescriptions, purchasing, setPurchasing, setHowToPlayOpen }) {
+function Buttons({ game, setGame, showHotkeys, setShowHotkeys, selected, setSelected, refresh, submit, costs, costDescriptions, purchasing, setPurchasing, completedCategories, setHowToPlayOpen }) {
     function buttonStyle(disabled) {
         return {
             backgroundColor: disabled ? 'red' : null,
@@ -279,7 +279,7 @@ function Buttons({ game, setGame, showHotkeys, setShowHotkeys, selected, setSele
                     </Grid>
                     {Object.keys(game.data).map((category) =>
                         <Grid item>
-                            <Button style={buttonStyle(selected.length != 4)} color="primary" variant="contained" disabled={selected.length != 4} onClick={() => submit(category)}>{category}</Button>
+                            <Button disabled={completedCategories.includes(category) || selected.length != 4} style={completedCategories.includes(category) ? { color: 'white', backgroundColor: 'green' } : buttonStyle(selected.length != 4)} color="primary" variant="contained" onClick={() => submit(category)}>{category}</Button>
                         </Grid>
                     )}
                 </Grid>
@@ -331,6 +331,7 @@ export default function MagicPage() {
     let [points, setPoints] = useState(100);
     let [selected, setSelected] = useState([]);
     let [completed, setCompleted] = useState([]);
+    let [completedCategories, setCompletedCategories] = useState([]);
     let [purchasing, setPurchasing] = useState(false);
     let [showHotkeys, setShowHotkeys] = useState(false);
     let [flashingRed, setFlashingRed] = useState([]);
@@ -383,6 +384,7 @@ export default function MagicPage() {
         setPoints(100);
         setSelected([]);
         setCompleted([]);
+        setCompletedCategories([]);
         setPurchasing(null);
         setVisibilities(freshVisibilities());
     }
@@ -497,10 +499,12 @@ export default function MagicPage() {
         if (game.data[category].every((card) => selected.includes(indexOfCardName(card)))) {
             if (completed.length === 8) {
                 setCompleted(allCards);
+                setCompletedCategories(game.data.map((key) => key));
                 setSelected([]);
                 return;
             } else {
                 setCompleted([...completed, ...selected]);
+                setCompletedCategories([...completedCategories, category]);
                 setSelected([]);
             }
             return;
@@ -529,7 +533,7 @@ export default function MagicPage() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ margin: '10px', display: 'flex', justifyContent: 'center' }}>
-                <Buttons game={game} setGame={setGame} showHotkeys={showHotkeys} setShowHotkeys={setShowHotkeys} selected={selected} setSelected={setSelected} refresh={refresh} submit={submit} costs={costs} costDescriptions={costDescriptions} purchasing={purchasing} setPurchasing={setPurchasing} setHowToPlayOpen={setHowToPlayOpen}/>
+                <Buttons game={game} setGame={setGame} showHotkeys={showHotkeys} setShowHotkeys={setShowHotkeys} selected={selected} setSelected={setSelected} refresh={refresh} submit={submit} completedCategories={completedCategories} costs={costs} costDescriptions={costDescriptions} purchasing={purchasing} setPurchasing={setPurchasing} setHowToPlayOpen={setHowToPlayOpen}/>
             </div>
             <div style={{ margin: '10px', display: 'flex', justifyContent: 'center' }}>
                 <Header game={game} points={points} finished={completed.length === 16} />
