@@ -12,10 +12,6 @@ let URL = 'https://glydergames.com/magic/app'
 function newGame(setGame, refresh) {
    fetchWrapper(URL + '/new_game', {}, 'GET')
         .then((response) => {
-            if (localStorage.getItem('magic') && new Date().getTime() - localStorage.getItem('magic') < 1000 * 2) {
-                return;
-            }
-            localStorage.setItem('magic', new Date().getTime());
             setGame(response);
             refresh();
         })
@@ -466,14 +462,6 @@ export default function MagicPage() {
             window.removeEventListener('keydown', handleKeyDown);
         }
     }, [purchasing])
-
-    useEffect(() => {
-        setInterval(() => {
-            if (!game) {
-                newGame(setGame, refresh);
-            }
-        }, 3000)
-    }, [game])
 
     if (!game) {
         return (
