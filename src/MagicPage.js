@@ -120,14 +120,14 @@ function EnrichedText({ text, style }) {
 
     let elements = parts.map((part, i) => {
         if (part in symbols) {
-            return <span key={i} style={style}>{symbols[part](style.fontSize)}</span>;
+            return <span key={i}>{symbols[part](style.fontSize)}</span>;
         } else {
-            return <span key={i} style={style}>{part}</span>
+            return <span key={i}>{part}</span>
         }
     })
 
     return (
-        <div style={{ lineHeight: 1 }}>
+        <div style={{ ...style, lineHeight: 1 }}>
             {elements}
         </div>
     )
@@ -170,7 +170,7 @@ function MagicCard({ card, visibilities, dimensions, flashingRed, index, selecte
         <div onClick={onClick} style={{ color: 'white', width: dimensions.width, minHeight: dimensions.height, height: '100%', flexGrow: 1, backgroundColor, display: 'flex', flexDirection: 'column', padding: '10px', borderRadius: '14px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <Typography style={{ fontSize: nameFontSize, fontWeight: 'bold' }}>{card.name}</Typography>
-                {visibility.manaCost && <EnrichedText text={card.mana_cost || 'None'} style={{ fontSize: nameFontSize, justifyContent: 'center', alignItems: 'center', textAlign: 'center', textJustify: 'center', display: 'flex' }} />}
+                {visibility.manaCost && <EnrichedText text={card.mana_cost || 'None'} style={{ fontSize: nameFontSize, justifyContent: 'center', alignItems: 'center', textAlign: 'center', textJustify: 'center', display: card.mana_cost ? null : 'flex' }} />}
             </div>
             <Typography style={{ opacity: visibility.type ? 1 : 0, fontSize: fontSize * 1.2, marginBottom: '10px' }}>{card.type}</Typography>
             <div style={{ marginBottom: '10px', opacity: visibility.rulesText ? 1 : 0 }}>
