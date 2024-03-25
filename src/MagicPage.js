@@ -170,7 +170,7 @@ function MagicCard({ card, visibilities, dimensions, flashingRed, index, selecte
         <div onClick={onClick} style={{ color: 'white', width: dimensions.width, minHeight: dimensions.height, height: '100%', flexGrow: 1, backgroundColor, display: 'flex', flexDirection: 'column', padding: '10px', borderRadius: '14px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <Typography style={{ fontSize: nameFontSize, fontWeight: 'bold' }}>{card.name}</Typography>
-                {visibility.manaCost && <EnrichedText text={card.mana_cost} style={{ fontSize: nameFontSize }} />}
+                {visibility.manaCost && <EnrichedText text={card.mana_cost || 'This card has no mana cost.'} style={{ fontSize: nameFontSize }} />}
             </div>
             <Typography style={{ opacity: visibility.type ? 1 : 0, fontSize: fontSize * 1.2, marginBottom: '10px' }}>{card.type}</Typography>
             <div style={{ marginBottom: '10px', opacity: visibility.rulesText ? 1 : 0 }}>
