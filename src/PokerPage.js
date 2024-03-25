@@ -423,7 +423,7 @@ export default function PokerPage() {
     }, [])
 
     if (loading || !gameId) {
-        return <div>Loading...</div>
+        return <h1 style={{ color: 'white' }}>Loading...</h1>
     }
 
     function calculateBackground(suit, rank) {

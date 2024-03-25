@@ -473,7 +473,7 @@ export default function MagicPage() {
                 newGame(setGame, refresh);
             }
         }, 3000)
-    }, [])
+    }, [game])
 
     if (!game) {
         return (
