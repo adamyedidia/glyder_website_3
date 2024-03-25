@@ -127,7 +127,7 @@ function EnrichedText({ text, style }) {
     })
 
     return (
-        <div style={{ display: 'flex', lineHeight: 1 }}>
+        <div style={{ lineHeight: 1 }}>
             {elements}
         </div>
     )
