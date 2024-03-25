@@ -13,7 +13,7 @@ const darkTheme = createTheme({
     },
 })
 
-let URL = 'https://glydergames/personalgoat/app'
+let URL = 'https://glydergames.com/personalgoat/app'
 
 let symbols = {
     'D': '♦',

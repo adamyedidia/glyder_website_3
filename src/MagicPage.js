@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-let URL = 'https://glydergames/magic/app'
+let URL = 'https://glydergames.com/magic/app'
 
 function newGame(setGame, refresh) {
    fetchWrapper(URL + '/new_game', {}, 'GET')
