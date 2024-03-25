@@ -127,7 +127,7 @@ function EnrichedText({ text, style }) {
     })
 
     return (
-        <div style={{ lineHeight: 1 }}>
+        <div style={{ display: 'flex', lineHeight: 1 }}>
             {elements}
         </div>
     )
@@ -136,7 +136,17 @@ function EnrichedText({ text, style }) {
 
 
 function MagicCard({ card, visibilities, dimensions, flashingRed, index, selected, setSelected, completed, purchase, purchasing }) {
-    const backgroundColor = flashingRed.includes(index) ? 'red' : completed.includes(index) ? 'darkgreen' : selected.includes(index) ? 'rgba(50, 50, 150, 1)' : purchasing ? 'green' : 'purple';
+     let visibility = completed.includes(index) ? {
+        'rulesText': true,
+        'manaCost': true,
+        'powerAndToughness': true,
+        'type': true,
+        'set': true,
+        'rarity': true,
+        'flavorText': true
+    } : visibilities[index];
+
+   const backgroundColor = flashingRed.includes(index) ? 'red' : completed.includes(index) ? 'darkgreen' : selected.includes(index) ? 'rgba(50, 50, 150, 1)' : purchasing && !visibility[purchasing] ? 'green' : 'purple';
 
     const fontSize = Math.min(dimensions.width, dimensions.height * 1.2) / 15;
 
@@ -156,21 +166,11 @@ function MagicCard({ card, visibilities, dimensions, flashingRed, index, selecte
         }
     };
 
-    let visibility = completed.includes(index) ? {
-        'rulesText': true,
-        'manaCost': true,
-        'powerAndToughness': true,
-        'type': true,
-        'set': true,
-        'rarity': true,
-        'flavorText': true
-    } : visibilities[index];
-
     return (
         <div onClick={onClick} style={{ color: 'white', width: dimensions.width, minHeight: dimensions.height, height: '100%', flexGrow: 1, backgroundColor, display: 'flex', flexDirection: 'column', padding: '10px', borderRadius: '14px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <Typography style={{ fontSize: nameFontSize, fontWeight: 'bold' }}>{card.name}</Typography>
-                {visibility.manaCost && <EnrichedText text={card.mana_cost || 'This card has no mana cost.'} style={{ fontSize: nameFontSize }} />}
+                {visibility.manaCost && <EnrichedText text={card.mana_cost || 'None'} style={{ fontSize: nameFontSize, justifyContent: 'center', alignItems: 'center', textAlign: 'center', textJustify: 'center', display: 'flex' }} />}
             </div>
             <Typography style={{ opacity: visibility.type ? 1 : 0, fontSize: fontSize * 1.2, marginBottom: '10px' }}>{card.type}</Typography>
             <div style={{ marginBottom: '10px', opacity: visibility.rulesText ? 1 : 0 }}>
