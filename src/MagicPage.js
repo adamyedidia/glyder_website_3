@@ -33,9 +33,9 @@ function HowToPlayDialog({ open, handleClose }) {
                 <DialogContent>
                     <DialogContentText style={{ color: 'white' }}>
                         <p> If you're familiar with the New York Times connections game, the rules are quite similar. </p>
-                        <p> Each game, there are four categories chosen at random. You can what they are based on the buttons at the top of the screen that say things like 'Rarity' or 'CMC'. </p>
+                        <p> Each game, there are four categories chosen at random. You can see what they are based on the buttons at the top of the screen that say things like 'Rarity' or 'CMC'. </p>
                         <p> For each category, there are exactly four cards that match perfectly. Each card belongs to exactly one such set. You win when you correctly submit 3 out of the 4 sets (since the last one is trivial at that point). </p>
-                        <p> You can purchase various facts about the cards by clicking the buttons that say things like 'Rules Text' and 'Mana Cost'. The point cost comes after the hyphen. </p>
+                        <p> You can purchase various facts about the cards by clicking the buttons that say things like 'Rules Text - 3' and 'Mana Cost - 3'. The point cost comes after the hyphen. </p>
                         <p> You can submit a guess for a four card set by clicking on four cards and then clicking the button corresponding to the property you think they share. Corret guesses are free and incorrect guesses cost 5 points. </p>
                         <p> Matches must always be exactly. For example, 'Artifact Creature', 'Legendary Creature', and 'Creature' are not the same type for the purposes of type. </p>
                         <p> Each category has a single correct answer - for example, if 'Rarity' is a category, there is exactly one rarity that has exactly 4 cards that match it. If there is a rarity with 5 cards that match it, it cannot be that a subset of those 5 cards is the correct rarity. </p>
