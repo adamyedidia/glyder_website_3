@@ -477,6 +477,8 @@ export default function MagicPage() {
 
     let allCards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
+    let allCategories = Object.keys(game.data);
+
     for (let key of Object.keys(game.data)) {
         game.data[key].forEach(card => {
             cards.push(card);
@@ -499,7 +501,7 @@ export default function MagicPage() {
         if (game.data[category].every((card) => selected.includes(indexOfCardName(card)))) {
             if (completed.length === 8) {
                 setCompleted(allCards);
-                setCompletedCategories(game.data.map((key) => key));
+                setCompletedCategories(allCategories);
                 setSelected([]);
                 return;
             } else {
