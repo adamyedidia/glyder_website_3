@@ -82,8 +82,6 @@ export default function WordLengthPage() {
     let [seed, setSeed] = useState('');
     const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
-    let textRef = useRef();
-
     function newGame() {
         let filteredTexts = texts.filter(text => {
             let words = text.split(' ');
@@ -91,7 +89,7 @@ export default function WordLengthPage() {
             words.forEach(word => {
                 total += word.length;
             });
-            return (total / words.length >= difficulty) && (total / words.length <= difficulty + 1) && words.length > 15;
+            return (total / words.length >= difficulty) && (total / words.length <= difficulty + 1) && words.length > 15 && total > 150;
         });
         setScore(null);
         setText(randomText(filteredTexts, seed));
@@ -128,10 +126,6 @@ export default function WordLengthPage() {
             if (e.key === 'Enter' && textIndex === -1) {
                 setTextIndex(0);
                 setStartTime(Date.now());
-                if (textRef && textRef.current) {
-                    console.log('focusing');
-                    textRef.current.focus();
-                }
             }
         };
 
@@ -189,7 +183,7 @@ export default function WordLengthPage() {
             {textIndex === -1 ? <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             </div> : null}
             {textIndex === -1 ? <h2>Hit enter to start</h2> : null}
-            {textIndex !== -1 ? <TextField ref={textRef} inputProps={{ style: { textAlign: 'center' } }} style={{ marginBottom: '10px', padding: '3px', backgroundColor: 'white' }} value={submission} inputMode={"numeric"} onChange={e => setSubmission(e.target.value)} /> : null}
+            {textIndex !== -1 ? <TextField autoFocus inputProps={{ style: { textAlign: 'center' } }} style={{ marginBottom: '10px', padding: '3px', backgroundColor: 'white' }} value={submission} inputMode={"numeric"} onChange={e => setSubmission(e.target.value)} /> : null}
             {textIndex !== -1 ? <Text words={text.split(' ')} textIndex={textIndex} /> : null}
             {score ? <h2>{score}</h2> : null}
             <HowToPlayDialog open={howToPlayOpen} handleClose={() => setHowToPlayOpen(false)} />
