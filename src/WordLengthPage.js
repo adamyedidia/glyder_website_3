@@ -59,7 +59,7 @@ function HowToPlayDialog({ open, handleClose }) {
                 <DialogContent>
                     <DialogContentText style={{ color: 'white' }}>
                         <p> You will get assigned a random sentence or two of text. To move on to the next word, type in the length of the current word or click the corresponding button. There's no punishment for being wrong except that you have to erase your mistake and type the correct answer. </p>
-                        <p> You can change the difficulty of the game by selecting easy, medium, or hard (this determines how long the words are, on average). You can set a random seed to get the same text as someone else - if the seed and difficulty are the same, you'll always get the same text. </p>
+                        <p> You can change the difficulty of the game by selecting easy, medium, or hard (this determines how long the words are, on average). You can set a random seed to get the same text as someone else - if the seed and difficulty are the same, you'll always get the same text. Changes to settings aren't picked up until you hit "New Game" - if you change the difficulty and then just hit enter, you'll still have the old settings. </p>
                         <p> At the end, you'll see stats about your speed. </p>
                     </DialogContentText>
                 </DialogContent>
