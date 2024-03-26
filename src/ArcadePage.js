@@ -35,6 +35,22 @@ function MagicGame() {
     );
 }
 
+function WordLengthGame() {
+    return (
+        <Typography style={{ fontSize: '24px' }}>
+            <br />
+            <b>Word Length Racer</b>
+            <br />
+            A simple speed test for counting how many letters are in words, similar to Type Racer. Mostly made for racing your friends.
+            <br />
+            <Button variant="contained" color="primary" component={Link} to="/wordlength" style={{ color: 'white' }}>
+                Try it out!
+            </Button>
+        </Typography>
+    );
+
+}
+
 
 export default function ArcadePage() {
     const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
@@ -57,6 +73,9 @@ export default function ArcadePage() {
             <br />
             <br />
             <MagicGame />
+            <br />
+            <br />
+            <WordLengthGame />
         </div>
     );
 }

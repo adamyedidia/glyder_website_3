@@ -6,6 +6,7 @@ import GamesPage from './GamesPage';
 import ArcadePage from './ArcadePage';
 import PokerPage from './PokerPage';
 import MagicPage from './MagicPage';
+import WordLengthPage from './WordLengthPage';
 import './App.css';
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
         <Route path="/arcade" element={<ArcadePage />} />
         <Route path="/poker" element={<PokerPage />} />
         <Route path="/magic" element={<MagicPage />} />
+        <Route path="/wordlength" element={<WordLengthPage />} />
+        <Route path='*' element={<LandingPage />} />
         {/* <Route path="/jobs" element={<JobsPage />} /> */}
       </Routes>
     </Router>
