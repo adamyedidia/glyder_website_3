@@ -48,7 +48,21 @@ function WordLengthGame() {
             </Button>
         </Typography>
     );
+}
 
+function DejumblerGame() {
+    return (
+        <Typography style={{ fontSize: '24px' }}>
+            <br />
+            <b>Dejumbler</b>
+            <br />
+            A game about unscrambling words. You're given a word and its definition, but all the words are anagramed, and you're trying to find the word.
+            <br />
+            <Button variant="contained" color="primary" component={Link} to="/dejumbler" style={{ color: 'white' }}>
+                Try it out!
+            </Button>
+        </Typography>
+    );
 }
 
 
@@ -76,6 +90,9 @@ export default function ArcadePage() {
             <br />
             <br />
             <WordLengthGame />
+            <br />
+            <br />
+            <DejumblerGame />
         </div>
     );
 }
