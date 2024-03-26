@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import definitions from './words/definitions.json';
-import TextField from '@mui/material/TextField';
+import TextField from '@material-ui/core/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
