@@ -78,7 +78,7 @@ export default function WordLengthPage() {
     let [loading, setLoading] = useState(true);
     let [startTime, setStartTime] = useState(null);
     let [score, setScore] = useState(null);
-    let [difficulty, setDifficulty] = useState(5);
+    let [difficulty, setDifficulty] = useState(3.5);
     let [seed, setSeed] = useState('');
     const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
@@ -164,9 +164,9 @@ export default function WordLengthPage() {
                 </Grid> 
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                <Button style={{ margin: '10px', backgroundColor: difficulty === 4 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(4)}>Easy</Button>
-                <Button style={{ margin: '10px', backgroundColor: difficulty === 5 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(5)}>Medium</Button>
-                <Button style={{ margin: '10px', backgroundColor: difficulty === 5.5 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(5.5)}>Hard</Button>
+                <Button style={{ margin: '10px', backgroundColor: difficulty === 4 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(3.5)}>Easy</Button>
+                <Button style={{ margin: '10px', backgroundColor: difficulty === 5 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(4.5)}>Medium</Button>
+                <Button style={{ margin: '10px', backgroundColor: difficulty === 5.5 ? 'green' : null }} color="primary" variant="contained" onClick={() => setDifficulty(5)}>Hard</Button>
                 <TextField style={{ color: 'white', margin: '10px' }} value={seed} onChange={e => setSeed(e.target.value)} label="Set Random Seed" InputLabelProps={{ style: { textAlign: 'center', color: 'white' } }} inputProps={{ style: { textAlign: 'center', color: 'white' } }} />
             </div>
             {textIndex !== -1 ?
