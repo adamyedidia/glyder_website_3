@@ -78,7 +78,7 @@ export default function WordLengthPage() {
     let [loading, setLoading] = useState(true);
     let [startTime, setStartTime] = useState(null);
     let [score, setScore] = useState(null);
-    let [difficulty, setDifficulty] = useState(3.5);
+    let [difficulty, setDifficulty] = useState(4.5);
     let [seed, setSeed] = useState('');
     const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
