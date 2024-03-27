@@ -109,7 +109,7 @@ export default function WordLengthPage() {
     let currentWord = text.split(' ')[textIndex];
     let length = null;
     if (currentWord) {
-        currentWord = currentWord.replace(/[^a-zA-Z]/g, '');
+        currentWord = currentWord.replace(/[^a-zA-Z0-9]/g, '');
         length = currentWord.length;
     }
 
