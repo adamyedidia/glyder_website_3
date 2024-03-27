@@ -114,6 +114,13 @@ export default function WordLengthPage() {
     }
 
     useEffect(() => {
+        if (length === 0) {
+            setTextIndex(textIndex + 1);
+            setSubmission('');
+        }
+    }, [length]);
+
+    useEffect(() => {
         let submissionInt = parseInt(submission);
         if (submissionInt === length) {
             setTextIndex(textIndex + 1);
