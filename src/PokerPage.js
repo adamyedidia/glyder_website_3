@@ -277,7 +277,7 @@ function PlayerCards({ cards, cardDimensions, dealerBestHand, handDescription, i
             {rows.map((row, rowIndex) => (
                 <div key={rowIndex} className="card-row" style={{ display: 'flex', marginBottom: '10px' }}>
                     {row.map((card, cardIndex) => (
-                        <Card key={cardIndex} dimensions={cardDimensions} suit={card.suit} rank={rank_to_name[card.rank]} border={isDealer ? 'red' : 'green'} background={isDealer && dealerBestHand.filter(c => c.suit === card.suit && c.rank === card.rank).length > 0 ? 'green' : null} />
+                        <Card key={cardIndex} dimensions={cardDimensions} suit={card.suit} rank={rank_to_name[card.rank]} border={isDealer ? 'red' : 'green'} background={isDealer && dealerBestHand?.filter(c => c.suit === card.suit && c.rank === card.rank).length > 0 ? 'green' : null} />
                     ))}
                 </div>
             ))}
