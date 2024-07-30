@@ -88,7 +88,7 @@ function HowToPlayDialog({ open, handleClose }) {
     )
 }
 
-function Hotkeys({ }) {
+function Hotkeys() {
     return (
         <div style={{
             display: 'flex',
@@ -447,7 +447,7 @@ export default function PokerPage() {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <CardGrid game={game} selectedCards={selectedCards} setSelectedCards={setSelectedCards} calculateBackground={calculateBackground} cardDimensions={dimensions} />
             </div>
-            {game.message && <h1 style={{ color: game.message === 'You win!' ? 'green' : game.message == 'You lose!' ? 'red' : 'white' }}>{game.message}</h1>}
+            {game.message && <h1 style={{ color: game.message === 'You win!' ? 'green' : game.message === 'You lose!' ? 'red' : 'white' }}>{game.message}</h1>}
             <PlayerCards cardDimensions={dimensions} cards={game?.playerCards} handDescription={game.playerHandDescription} />
             <PlayerCards cardDimensions={dimensions} cards={game?.dealerCards} handDescription={game.dealerHandDescription} dealerBestHand={highlightDealerBestHand ? game.dealerHand : []} isDealer={true} />
             <Hotkeys />

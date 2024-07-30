@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import { Grid, withTheme } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import TabBar from './TabBar';
 import { useMediaQuery } from '@material-ui/core';
 
