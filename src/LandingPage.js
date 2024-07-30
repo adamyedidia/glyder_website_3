@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
+import { Grid, withTheme } from '@material-ui/core';
 import TabBar from './TabBar';
 import { useMediaQuery } from '@material-ui/core';
 
@@ -55,7 +55,11 @@ export default function LandingPage() {
                 style={{ 
                     maxHeight: '30vh',
                     maxWidth: '80vw',
-                    marginTop: '5vh' 
+                    marginTop: '5vh',
+                    border: '4px solid white',
+                    padding: '20px',
+                    borderRadius: '10px',
+                    backgroundColor: 'black',
                 }} 
             />}
 
