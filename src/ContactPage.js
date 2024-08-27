@@ -30,7 +30,9 @@ export default function ContactPage() {
       window.removeEventListener("keydown", handleKeyDown);
       document.title = oldTitle;
     };
-  }, []);
+  }, [
+    navigate, oldTitle
+  ]);
 
   return (
     <div

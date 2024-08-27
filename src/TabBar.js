@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Tabs, Tab, makeStyles, useMediaQuery } from '@material-ui/core';
+import { Tabs, Tab, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     tabs: {

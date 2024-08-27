@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import texts from './words/lines.json';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -118,7 +118,7 @@ export default function WordLengthPage() {
             setTextIndex(textIndex + 1);
             setSubmission('');
         }
-    }, [length]);
+    }, [length, textIndex]);
 
     useEffect(() => {
         let submissionInt = parseInt(submission);
@@ -126,7 +126,7 @@ export default function WordLengthPage() {
             setTextIndex(textIndex + 1);
             setSubmission('');
         }
-    }, [submission]);
+    }, [submission, length, textIndex]);
 
     useEffect(() => {
         const handleKeyDown = e => {
@@ -149,7 +149,7 @@ export default function WordLengthPage() {
             setScore(`${(time / 1000).toFixed(0)} total seconds, ${wpm} words per minute, ${cpm} characters per minute`);
 
         }
-    }, [textIndex]);
+    }, [textIndex, startTime, text.length]);
 
     if (!text || loading) {
         return <div>Loading...</div>;
