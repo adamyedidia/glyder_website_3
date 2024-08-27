@@ -37,6 +37,14 @@ export default function LandingPage() {
     const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
     const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth;
 
+    const clickedImageToLowresScreenshotPath = (index) => {
+        const titleList = ["drawback_chess", "rookery", "civlite", "shibboleth"];
+        if (titleList[index] === "rookery") {
+            return `/assets/lowres_${titleList[index]}_screenshot.jpg`;
+        }
+        return `/assets/lowres_${titleList[index]}_screenshot.jpeg`;
+    }
+
     return (
         <div className="page-container" onClick={handleOutsideClick} style={{ 
             display: 'flex', 
@@ -53,7 +61,7 @@ export default function LandingPage() {
                 src="/assets/glyder_games.png" 
                 alt="Glyder Games Logo" 
                 style={{ 
-                    maxHeight: '30vh',
+                    maxHeight: '20vh',
                     maxWidth: '80vw',
                     marginTop: '5vh',
                     border: '4px solid white',
@@ -65,11 +73,11 @@ export default function LandingPage() {
 
             {isSmallScreen ? null : <Grid container justify="center" alignItems="center" spacing={5} style={{ height: '60vh', marginTop: clickedImage !== null ? "0vh" : "5vh", ...(clickedImage !== null ? {position: 'relative'} : {}) }}>
                 <Grid container justify="center" alignItems="center" spacing={5}>
-                    {["drawback_chess", "mystery", "civlite", "shibboleth"].map((game, index) => (
+                    {["drawback_chess", "rookery", "civlite", "shibboleth"].map((game, index) => (
                         <Grid item key={index}>
                             <a href="#" onClick={(e) => handleImageClick(index, e)}>
                                 <img
-                                    src={`/assets/lowres_${game}_screenshot.jpeg`}
+                                    src={clickedImageToLowresScreenshotPath(index)}
                                     alt={game}
                                     style={{
                                         maxHeight: '25vh',
@@ -87,8 +95,8 @@ export default function LandingPage() {
             {/* Display higher-res image when clicked */}
             {clickedImage !== null && (
                 <img
-                    src={`/assets/lowres_${["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}_screenshot.jpeg`}
-                    alt={["drawback_chess", "mystery", "civlite", "shibboleth"][clickedImage]}
+                    src={clickedImageToLowresScreenshotPath(clickedImage)}
+                    alt={["drawback_chess", "rookery", "civlite", "shibboleth"][clickedImage]}
                     style={{ height: '60vh', marginBottom: '5vh', marginTop: '5vh' }}
                 />
             )}
