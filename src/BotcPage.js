@@ -1,6 +1,6 @@
 import { Characters } from './BotcCharacters.js';
 import { useState, useEffect } from 'react';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button } from '@material-ui/core';
 
 function getColor(team) {
     return {
