@@ -27,7 +27,7 @@ const Character = ({ id, name, team, ability, edition }) => {
         padding: '0.5rem',
         borderRadius: '0.5rem',
         height: '100%',
-        minHeight: '140px'
+        minHeight: '7rem'
     }
 
     return (
@@ -153,34 +153,42 @@ export default function BotcPage() {
         characters.sort((a, b) => filterSort(a, b))
     }
 
+    let buttonStyles = {
+        padding: '0.5rem',
+        minWidth: '3rem',
+    }
+
     let selectedButtonStyle = {
         backgroundColor: 'blue',
         color: 'white',
+        ...buttonStyles,
     }
 
     return (
         <div style={style}>
-            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
+            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.5rem' }}>
                 {sorts.map(s => (
-                    <Button key={s} onClick={() => setSort(s)} style={sort === s ? selectedButtonStyle : {}}>{s}</Button>
+                    <Button key={s} onClick={() => setSort(s)} style={sort === s ? selectedButtonStyle : buttonStyles}>{s}</Button>
                 ))}
-                <Button onClick={() => setReversed(!reversed)}>Reverse sort</Button>
+                <Button onClick={() => setReversed(!reversed)} style={buttonStyles}>Reverse sort</Button>
             </div>}
-            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
+            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.5rem' }}>
                 {types.map(t => (
                     <Button key={t} onClick={() => setIncludeRoles({ ...includeRoles, [t]: !includeRoles[t] })} style={includeRoles[t] ? selectedButtonStyle : {}}>{t}</Button>
                 ))}
             </div>}
-            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
-                {showFilters && editions.map(e => (
-                    <Button key={e} onClick={() => setIncludeEditions({ ...includeEditions, [e]: !includeEditions[e] })} style={includeEditions[e] ? selectedButtonStyle : {}}>{e}</Button>
+            {showFilters && <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
+                {editions.map(e => (
+                    <Button key={e} onClick={() => setIncludeEditions({ ...includeEditions, [e]: !includeEditions[e] })} style={{ ...(includeEditions[e] ? selectedButtonStyle : {}), padding: '0.5rem', minWidth: '3rem' }}>{e}</Button>
                 ))}
+            </div>}
+            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
                 {showFilters && <TextField
                     label="Filter"
                     value={filter}
-                    onChange={e => setFilter(e.target.value)}
+                    onChange={e => setFilter(e.target.value)} 
                 />}
-                <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide filters' : 'Show filters'}</Button>
+                <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide' : 'Show'}</Button>
             </div>
             <Grid container style={{ width: '100%', justifyContent: 'flex-start', overflow: 'auto' }} spacing={2}>
                 {characters.map(c => (
