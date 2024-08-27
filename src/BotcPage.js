@@ -18,7 +18,7 @@ const Character = ({ id, name, team, ability, edition }) => {
         fontWeight: 'bold',
         textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
     }
-    
+
     let style = {
         display: 'flex',
         flexDirection: 'column',
@@ -27,6 +27,7 @@ const Character = ({ id, name, team, ability, edition }) => {
         padding: '0.5rem',
         borderRadius: '0.5rem',
         height: '100%',
+        minHeight: '140px'
     }
 
     return (
@@ -38,16 +39,16 @@ const Character = ({ id, name, team, ability, edition }) => {
                 <Typography style={nameStyle}>{name}</Typography>
             </div>
             <Typography style={{ fontSize: '1rem', height: '100%' }}>{ability}</Typography>
-            <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                width: '100%', 
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
                 marginTop: 'auto',
                 fontSize: '0.8rem',
                 fontStyle: 'italic',
             }}>
                 <Typography style={{ fontSize: '1rem', alignSelf: 'flex-start' }}>{team}</Typography>
-                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition || ''}</Typography>
+                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition || 'ø'}</Typography>
             </div>
         </div>
     );
@@ -64,26 +65,35 @@ function editionSort(edition) {
 function teamSort(team) {
     return {
         'townsfolk': 1,
-        'minion': 2,
-        'demon': 3,
-        'outsider': 4,
+        'outsider': 2,
+        'minion': 3,
+        'demon': 4,
         'traveler': 5,
     }[team]
 }
 
 export default function BotcPage() {
+    let [showFilters, setShowFilters] = useState(false)
     let [sort, setSort] = useState('alphabetical')
     let [filter, setFilter] = useState("");
     let [reversed, setReversed] = useState(false)
-    let [include, setInclude] = useState({
+    let [includeRoles, setIncludeRoles] = useState({
         'townsfolk': true,
         'minion': true,
         'demon': true,
         'outsider': true,
         'traveler': true,
     })
+    let [includeEditions, setIncludeEditions] = useState({
+        'tb': true,
+        'bmr': true,
+        'snv': true,
+        'other': true,
+    })
 
     let types = ['townsfolk', 'minion', 'demon', 'outsider', 'traveler']
+
+    let editions = ['tb', 'bmr', 'snv', 'other']
 
     let sorts = [
         'alphabetical',
@@ -105,14 +115,16 @@ export default function BotcPage() {
         flexDirection: 'column',
         alignSelf: 'center',
         width: 'calc(100% - 2rem)',
-        minHeight: 'calc(100vh - 2rem)',
+        height: '100vh',
         padding: '1rem',
         backgroundColor: 'rgba(0, 0, 0, 0.15)',
     }
 
     let characters = Object.values(Characters)
 
-    characters = characters.filter(c => include[c.team])
+    characters = characters.filter(c => includeRoles[c.team])
+
+    characters = characters.filter(c => includeEditions[c.edition || 'other'])
 
     if (sort === 'alphabetical') {
         characters.sort((a, b) => a.name.localeCompare(b.name))
@@ -148,30 +160,35 @@ export default function BotcPage() {
 
     return (
         <div style={style}>
-            <div style={{ marginBottom: '1rem' }}>
+            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
                 {sorts.map(s => (
                     <Button key={s} onClick={() => setSort(s)} style={sort === s ? selectedButtonStyle : {}}>{s}</Button>
                 ))}
                 <Button onClick={() => setReversed(!reversed)}>Reverse sort</Button>
-            </div>
-            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
+            </div>}
+            {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '1rem' }}>
                 {types.map(t => (
-                    <Button key={t} onClick={() => setInclude({ ...include, [t]: !include[t] })} style={include[t] ? selectedButtonStyle : {}}>{t}</Button>
+                    <Button key={t} onClick={() => setIncludeRoles({ ...includeRoles, [t]: !includeRoles[t] })} style={includeRoles[t] ? selectedButtonStyle : {}}>{t}</Button>
                 ))}
-            </div>
-            <div style={{ marginBottom: '1rem' }}>  
-                <TextField
+            </div>}
+            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem' }}>
+                {showFilters && editions.map(e => (
+                    <Button key={e} onClick={() => setIncludeEditions({ ...includeEditions, [e]: !includeEditions[e] })} style={includeEditions[e] ? selectedButtonStyle : {}}>{e}</Button>
+                ))}
+                {showFilters && <TextField
                     label="Filter"
                     value={filter}
                     onChange={e => setFilter(e.target.value)}
-                />
+                />}
+                <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide filters' : 'Show filters'}</Button>
             </div>
-            <Grid container style={{ width: '100%', justifyContent: 'flex-start' }} spacing={2}>
+            <Grid container style={{ width: '100%', justifyContent: 'flex-start', overflow: 'auto' }} spacing={2}>
                 {characters.map(c => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={c.id} style={{ marginBottom: '1rem' }}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={c.id} style={{ marginBottom: '0.25rem' }}>
                         <Character id={c.id} name={c.name} team={c.team} ability={c.ability} edition={c.edition} />
                     </Grid>
                 ))}
+                <Grid item xs={12} style={{ height: '100px' }}></Grid>
             </Grid>
         </div>
     );
