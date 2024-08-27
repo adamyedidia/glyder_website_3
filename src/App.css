@@ -70,6 +70,14 @@ body::before {
   background: rgba(0, 0, 0, 0.8);
 }
 
+.botc {
+  background-image: none !important;
+}
+
+.botc::before {
+  background: white;
+}
+
 @media (max-width: 600px) {
   body {
     background-image: url('./images/frame_8_small.png');
