@@ -47,7 +47,7 @@ const Character = ({ id, name, team, ability, edition }) => {
                 fontStyle: 'italic',
             }}>
                 <Typography style={{ fontSize: '1rem', alignSelf: 'flex-start' }}>{team}</Typography>
-                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition}</Typography>
+                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition || ''}</Typography>
             </div>
         </div>
     );

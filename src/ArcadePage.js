@@ -69,7 +69,7 @@ function DejumblerGame() {
 export default function ArcadePage() {
     const isSmallScreenHeight = useMediaQuery('(max-height:800px)');
     const isSmallScreenWidth = useMediaQuery('(max-width:500px)');
-    const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth;
+    const isSmallScreen = isSmallScreenHeight || isSmallScreenWidth || true;
 
     return (
         <div
