@@ -108,6 +108,26 @@ export default function BotcPage() {
         };
     }, []);
 
+    const preventScrollPropagation = (e) => {
+        const element = e.target;
+        if (
+            (element.scrollTop === 0 && e.deltaY < 0) ||
+            (element.scrollHeight - element.scrollTop === element.clientHeight && e.deltaY > 0)
+        ) {
+            e.preventDefault();
+        }
+    };
+
+    useEffect(() => {
+        const innerContainer = document.querySelector('.inner-container');
+        innerContainer.addEventListener('wheel', preventScrollPropagation);
+
+        return () => {
+            innerContainer.removeEventListener('wheel', preventScrollPropagation);
+        };
+    }, []);
+
+
     let style = {
         color: 'white',
         display: 'flex',
@@ -118,6 +138,7 @@ export default function BotcPage() {
         height: 'calc(98vh)',
         backgroundColor: 'rgba(0, 0, 0, 0.15)',
         overflow: 'hidden',
+        touchAction: 'none',
     }
 
     let characters = Object.values(Characters)
@@ -165,7 +186,7 @@ export default function BotcPage() {
     }
 
     return (
-        <div style={style}>
+        <div style={style} className="outer-container">
             {showFilters && <div style={{ marginBottom: '0.5rem', display: 'flex', gap: '0.5rem' }}>
                 {sorts.map(s => (
                     <Button key={s} onClick={() => setSort(s)} style={sort === s ? selectedButtonStyle : buttonStyles}>{s}</Button>
@@ -182,11 +203,11 @@ export default function BotcPage() {
                     <Button key={e} onClick={() => setIncludeEditions({ ...includeEditions, [e]: !includeEditions[e] })} style={{ ...(includeEditions[e] ? selectedButtonStyle : {}), padding: '0.5rem', minWidth: '3rem' }}>{e}</Button>
                 ))}
             </div>}
-            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }} className="inner-container">
                 {showFilters && <TextField
                     label="Filter"
                     value={filter}
-                    onChange={e => setFilter(e.target.value)} 
+                    onChange={e => setFilter(e.target.value)}
                 />}
                 <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide' : 'Show'}</Button>
             </div>
