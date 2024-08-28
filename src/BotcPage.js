@@ -27,7 +27,6 @@ const Character = ({ id, name, team, ability, edition }) => {
         padding: '0.5rem',
         borderRadius: '0.5rem',
         height: '100%',
-        minHeight: '7rem'
     }
 
     return (
@@ -114,10 +113,11 @@ export default function BotcPage() {
         display: 'flex',
         flexDirection: 'column',
         alignSelf: 'center',
-        width: 'calc(100% - 2rem)',
-        height: '100vh',
-        padding: '1rem',
+        width: 'calc(100% - 2vh)',
+        padding: '1vh',
+        height: 'calc(98vh)',
         backgroundColor: 'rgba(0, 0, 0, 0.15)',
+        overflow: 'hidden',
     }
 
     let characters = Object.values(Characters)
