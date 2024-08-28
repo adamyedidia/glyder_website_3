@@ -218,7 +218,7 @@ export default function BotcPage() {
                         <Character id={c.id} name={c.name} team={c.team} ability={c.ability} edition={c.edition} />
                     </Grid>
                 ))}
-                <Grid item xs={12} style={{ height: '100px' }}></Grid>
+                <Grid item xs={12} style={{ height: '200px' }}></Grid>
             </Grid>
         </div>
     );
