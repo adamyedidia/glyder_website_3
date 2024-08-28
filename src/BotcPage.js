@@ -74,7 +74,8 @@ function teamSort(team) {
 export default function BotcPage() {
     let [showFilters, setShowFilters] = useState(false)
     let [sort, setSort] = useState('alphabetical')
-    let [filter, setFilter] = useState("");
+    let [nameFilter, setNameFilter] = useState("");
+    let [abilityFilter, setAbilityFilter] = useState("");
     let [reversed, setReversed] = useState(false)
     let [includeRoles, setIncludeRoles] = useState({
         'townsfolk': true,
@@ -156,8 +157,8 @@ export default function BotcPage() {
         characters.sort((a, b) => teamSort(a.team) - teamSort(b.team))
     }
 
-    function filterSort(a, b) {
-        let filterLower = filter.toLowerCase()
+    function nameFilterSort(a, b) {
+        let filterLower = nameFilter.toLowerCase()
         if (a.name.toLowerCase().startsWith(filterLower) && !b.name.toLowerCase().startsWith(filterLower)) {
             return -1
         } else if (!a.name.toLowerCase().startsWith(filterLower) && b.name.toLowerCase().startsWith(filterLower)) {
@@ -166,13 +167,30 @@ export default function BotcPage() {
             return 0
         }
     }
+
+    function abilityFilterSort(a, b) {
+        let filterLower = abilityFilter.toLowerCase()
+        if (a.ability.toLowerCase().startsWith(filterLower) && !b.ability.toLowerCase().startsWith(filterLower)) {
+            return -1
+        } else if (!a.ability.toLowerCase().startsWith(filterLower) && b.ability.toLowerCase().startsWith(filterLower)) {
+            return 1
+        } else {
+            return 0
+        }
+    }
+
     if (reversed) {
         characters.reverse()
     }
 
-    if (filter) {
-        characters = characters.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()))
-        characters.sort((a, b) => filterSort(a, b))
+    if (nameFilter) {
+        characters = characters.filter(c => c.name.toLowerCase().includes(nameFilter.toLowerCase()))
+        characters.sort((a, b) => nameFilterSort(a, b))
+    }
+
+    if (abilityFilter) {
+        characters = characters.filter(c => c.ability.toLowerCase().includes(abilityFilter.toLowerCase()))
+        characters.sort((a, b) => abilityFilterSort(a, b))
     }
 
     let buttonStyles = {
@@ -206,9 +224,16 @@ export default function BotcPage() {
             </div>}
             <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }} className="inner-container">
                 {showFilters && <TextField
-                    label="Filter"
-                    value={filter}
-                    onChange={e => setFilter(e.target.value)}
+                    label="Name"
+                    value={nameFilter}
+                    onChange={e => setNameFilter(e.target.value)}
+                    style={{ maxWidth: '10rem' }}
+                />}
+                {showFilters && <TextField
+                    label="Ability"
+                    value={abilityFilter}
+                    onChange={e => setAbilityFilter(e.target.value)}
+                    style={{ maxWidth: '10rem' }}
                 />}
                 <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide' : 'Show'}</Button>
             </div>
