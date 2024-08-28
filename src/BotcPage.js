@@ -139,6 +139,7 @@ export default function BotcPage() {
         backgroundColor: 'rgba(0, 0, 0, 0.15)',
         overflow: 'hidden',
         touchAction: 'none',
+        overscrollBehavior: 'none',
     }
 
     let characters = Object.values(Characters)
@@ -211,7 +212,7 @@ export default function BotcPage() {
                 />}
                 <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide' : 'Show'}</Button>
             </div>
-            <Grid container style={{ width: '100%', justifyContent: 'flex-start', overflow: 'auto' }} spacing={2}>
+            <Grid container style={{ width: '100%', justifyContent: 'flex-start', overflow: 'auto', overscrollBehavior: 'contain' }} spacing={2}>
                 {characters.map(c => (
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={c.id} style={{ marginBottom: '0.25rem' }}>
                         <Character id={c.id} name={c.name} team={c.team} ability={c.ability} edition={c.edition} />
