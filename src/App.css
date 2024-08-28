@@ -77,6 +77,8 @@ body::before {
 
 .botc {
   background-image: none !important;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .botc::before {
