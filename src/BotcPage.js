@@ -107,6 +107,7 @@ export default function BotcPage() {
             document.body.classList.remove('botc');
         };
     }, []);
+
     let style = {
         color: 'white',
         display: 'flex',
@@ -117,14 +118,6 @@ export default function BotcPage() {
         height: 'calc(98vh)',
         backgroundColor: 'rgba(0, 0, 0, 0.15)',
         overflow: 'hidden',
-        position: 'fixed',
-        top: '1vh',
-        left: '1vh',
-        right: '1vh',
-        bottom: '1vh',
-        overflowY: 'hidden',
-        overflowX: 'hidden',
-        touchAction: 'none',
     }
 
     let characters = Object.values(Characters)
