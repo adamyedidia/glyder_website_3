@@ -1796,6 +1796,6 @@ export const Characters = {
         'id': 'marco',
         'name': 'Marco',
         'team': 'townsfolk',
-        'ability': 'Once per game at night, say Marco. The Demon must say polo tonight or dies.'
+        'ability': 'Once per game at night, say Marco. The Demon must say Polo tonight or dies.'
     }
 }
