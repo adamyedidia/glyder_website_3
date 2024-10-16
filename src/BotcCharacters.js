@@ -1792,4 +1792,10 @@ export const Characters = {
         'team': 'townsfolk',
         'ability': 'If the Demon kills you, all players learn this. From now on, you may nominate twice per day and vote twice per nomination.'
     },
+    'Marco': {
+        'id': 'marco',
+        'name': 'Marco',
+        'team': 'townsfolk',
+        'ability': 'Once per game at night, say Marco. The Demon must say polo tonight or dies.'
+    }
 }
