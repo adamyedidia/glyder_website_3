@@ -263,7 +263,7 @@ export default function BlogPage() {
                             <br />
                             Mid-level Mushroom Man is now harder
                             <br />
-                            Advanced-level Duck Pond is now harder
+                            Advanced-level Duck Pond is now easier
                             <br />
                             Monster Book energy cost increased between Ascensions 15 and 28 (2 → 3)
                             <br />
