@@ -9,7 +9,7 @@ import MagicPage from './MagicPage';
 import WordLengthPage from './WordLengthPage';
 import DejumblerPage from './DejumblerPage';
 import BotcPage from './BotcPage';
-import RookeryBlogPage from './RookeryBlogPage';
+// import RookeryBlogPage from './RookeryBlogPage';
 import './App.css';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         <Route path="/wordlength" element={<WordLengthPage />} />
         <Route path="/dejumbler" element={<DejumblerPage />} />
         <Route path="/botc" element={<BotcPage />} />
-        <Route path="/rookery-blog" element={<RookeryBlogPage />} />
+        {/* <Route path="/rookery-blog" element={<RookeryBlogPage />} /> */}
         <Route path='*' element={<LandingPage />} />
         {/* <Route path="/jobs" element={<JobsPage />} /> */}
       </Routes>
