@@ -175,85 +175,6 @@ function App() {
 
   let { townsfolk, outsiders, minions, demons, setupText, highlightedCharacters, header, firstNightOrder, otherNightOrder, icons } = config;
 
-  // const handleDownloadCharactersPDF = async () => {
-  //   // Create new PDF
-  //   const pdf = new jsPDF('portrait', 'pt', 'a4');
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = pdf.internal.pageSize.getHeight();
-  //   const margin = 40;
-  //   const scriptName = localStorage.getItem('selectedConfig') || 'CircleOfWhispers';
-
-  //   if (charactersRef.current) {
-  //     // Get element dimensions
-  //     const element = charactersRef.current;
-  //     const elementWidth = element.offsetWidth;
-  //     const elementHeight = element.offsetHeight;
-
-  //     // Calculate scale to fit width while maintaining aspect ratio
-  //     const scale = (pdfWidth - (margin * 2)) / elementWidth;
-
-  //     const charactersCanvas = await html2canvas(element, {
-  //       scale: scale * 2, // Multiply by 2 for better quality
-  //       logging: false,
-  //       useCORS: true,
-  //       width: elementWidth,
-  //       height: elementHeight,
-  //       windowWidth: elementWidth,
-  //       windowHeight: elementHeight
-  //     });
-
-  //     // Use full width minus margins
-  //     const imgWidth = pdfWidth - (margin * 2);
-  //     const imgHeight = (elementHeight * imgWidth) / elementWidth;
-
-  //     // Check if height exceeds page and scale down if needed
-  //     const maxHeight = pdfHeight - (margin * 2);
-  //     const finalWidth = imgHeight > maxHeight ? (imgWidth * maxHeight / imgHeight) : imgWidth;
-  //     const finalHeight = imgHeight > maxHeight ? maxHeight : imgHeight;
-
-  //     // Add character image to PDF
-  //     const charactersImgData = charactersCanvas.toDataURL('image/png');
-  //     pdf.addImage(charactersImgData, 'PNG', margin, margin + 20, finalWidth, finalHeight);
-  //   }
-
-  //   // Save the PDF
-  //   pdf.save(`botc-${scriptName.toLowerCase().replace(/\s+/g, '-')}-characters.pdf`);
-  // };
-
-  // const handleDownloadNightOrderPDF = async () => {
-  //   // Create new PDF
-  //   const pdf = new jsPDF('portrait', 'pt', 'a4');
-  //   const pdfWidth = pdf.internal.pageSize.getWidth();
-  //   const pdfHeight = pdf.internal.pageSize.getHeight();
-  //   const margin = 40;
-  //   const scriptName = localStorage.getItem('selectedConfig') || 'CircleOfWhispers';
-
-  //   // Set PDF title
-  //   pdf.setFontSize(16);
-  //   pdf.text(`Night Order: ${scriptName.replace(/([A-Z])/g, ' $1').trim()}`, margin, margin);
-  //   pdf.setFontSize(12);
-
-  //   if (nightOrderRef.current) {
-  //     const nightOrderCanvas = await html2canvas(nightOrderRef.current, {
-  //       scale: 1.5,
-  //       logging: false,
-  //       useCORS: true,
-  //       backgroundColor: null
-  //     });
-
-  //     // Calculate scale to fit on page with margins
-  //     const imgWidth = pdfWidth - (margin * 2);
-  //     const imgHeight = (nightOrderCanvas.height * imgWidth) / nightOrderCanvas.width;
-
-  //     // Add night order to PDF
-  //     const nightOrderImgData = nightOrderCanvas.toDataURL('image/png');
-  //     pdf.addImage(nightOrderImgData, 'PNG', margin, margin + 20, imgWidth, imgHeight);
-  //   }
-
-  //   // Save the PDF
-  //   pdf.save(`botc-${scriptName.toLowerCase().replace(/\s+/g, '-')}-night-order.pdf`);
-  // };
-
   function handleLoadConfig(configName) {
     loadConfig(configName, username)
       .then(config => {
@@ -290,7 +211,6 @@ function App() {
         const scaledHeight = imgHeight * scale;
 
         const xPos = margin + (contentWidth - scaledWidth) / 2;
-        // const yPos = margin + (pdfHeight - margin * 2 - scaledHeight) / 2;
         const yPos = margin;
 
         const imgData = canvas.toDataURL('image/png');
@@ -314,7 +234,7 @@ function App() {
           </Button>
         </div>
         <div ref={charactersRef}>
-          {header && <Typography variant="h6" sx={{ marginBottom: '20px', textAlign: 'center', width: '1070px' }} whiteSpace="pre-wrap">{header}</Typography>}
+          {header && <Typography variant="h6" sx={{ marginBottom: '20px', textAlign: 'center', width: '100%', maxWidth: '1070px' }} whiteSpace="pre-wrap">{header}</Typography>}
           <Section name="Townsfolk" characters={townsfolk.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
           <Section name="Outsiders" characters={outsiders.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
           <Section name="Minions" characters={minions.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
@@ -349,7 +269,6 @@ function App() {
         const scaledHeight = imgHeight * scale;
 
         const xPos = margin + (contentWidth - scaledWidth) / 2;
-        // const yPos = margin + (pdfHeight - margin * 2 - scaledHeight) / 2;
         const yPos = margin;
 
         const imgData = canvas.toDataURL('image/png');
@@ -391,7 +310,7 @@ function App() {
           </Button>
         </div>
 
-        <div ref={nightOrderRef} style={{ width: '100%', width: '1070px' }}>
+        <div ref={nightOrderRef} style={{ width: '100%', maxWidth: '1070px' }}>
           <div>
             <div style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '20px' }}>First Night</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
@@ -453,11 +372,10 @@ function App() {
       display: 'flex',
       gap: '10px',
       padding: '10px',
-      // backgroundColor: '#f5f5f5',
       borderRadius: '8px',
       marginBottom: '20px',
-      // width: 'fit-content',
-      // margin: '0 auto 20px auto'
+      overflowX: 'auto',
+      width: '100%'
     }}>
       {['characters', 'nightOrder', 'scriptEditor', 'account'].map(view => (
         <Button
@@ -470,7 +388,8 @@ function App() {
             backgroundColor: currentView === view ? '#4a90e2' : 'white',
             color: currentView === view ? 'white' : '#333',
             cursor: 'pointer',
-            fontWeight: '500'
+            fontWeight: '500',
+            whiteSpace: 'nowrap'
           }}
         >
           {view.charAt(0).toUpperCase() + view.slice(1).replace(/([A-Z])/g, ' $1')}
@@ -480,7 +399,17 @@ function App() {
   );
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px', alignItems: 'flex-start', marginLeft: '30px', marginRight: '30px' }}>
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      marginTop: '20px', 
+      alignItems: 'flex-start', 
+      padding: '0 30px',
+      width: '100%',
+      maxWidth: '100vw',
+      overflowX: 'hidden',
+      boxSizing: 'border-box'
+    }}>
       <ViewSelector />
       {showConfigSelect && (
         <div style={{
@@ -495,7 +424,8 @@ function App() {
           display: 'flex',
           flexDirection: 'column',
           gap: '12px',
-          minWidth: '250px'
+          minWidth: '250px',
+          maxWidth: '90vw'
         }}>
           <h2 style={{ margin: '0 0 16px 0', textAlign: 'center', color: '#333' }}>Select Script</h2>
           {Object.entries(configs).map(([key, scriptConfig]) => (
@@ -515,10 +445,7 @@ function App() {
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 fontSize: '16px',
-                fontWeight: '500',
-                ':hover': {
-                  backgroundColor: config === scriptConfig ? '#357abd' : '#e4e4e4'
-                }
+                fontWeight: '500'
               }}
             >
               {key.replace(/([A-Z])/g, ' $1').trim()}
