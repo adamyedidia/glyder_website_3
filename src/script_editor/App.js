@@ -35,7 +35,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
             onClick={loadSavedConfigs}
             sx={{ mt: 1 }}
           >
-            Reload Saved Scripts
+            Reload Scripts
           </Button>
         </CardContent>
       </Card>
@@ -130,7 +130,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                       <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => handleLoadConfig(configName)}
+                        onClick={() => handleLoadConfig(configName, by)}
                         fullWidth
                       >
                         Load
@@ -199,8 +199,8 @@ function App() {
 
   let { townsfolk, outsiders, minions, demons, setupText, highlightedCharacters, header, firstNightOrder, otherNightOrder, icons } = config;
 
-  function handleLoadConfig(configName) {
-    loadConfig(configName, username)
+  function handleLoadConfig(configName, by = username) {
+    loadConfig(configName, by)
       .then(config => {
         setConfig(config);
         localStorage.setItem('selectedConfig', configName);
