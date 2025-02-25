@@ -83,7 +83,7 @@ export default function Section({ name, characters, setupText, highlightedCharac
     return <div style={{ 
         display: 'flex', 
         flexDirection: 'column',
-        width: '1070px',
+        maxWidth: '1070px',
         gap: '0px'
     }}>
         <Header name={name} />

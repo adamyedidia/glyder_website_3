@@ -434,7 +434,8 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                     mb: 2,
                     backgroundColor: theme.palette.background.paper,
                     color: theme.palette.text.primary,
-                    maxWidth: '1200px',
+                    borderRadius: '10px',
+                    // maxWidth: '1200px',
                     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)'
                 }}
                 TransitionProps={{ unmountOnExit: true }}
@@ -809,7 +810,8 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                     mb: 2,
                     backgroundColor: theme.palette.background.paper,
                     color: theme.palette.text.primary,
-                    maxWidth: '1200px',
+                    borderRadius: '10px',
+                    // maxWidth: '1200px',
                     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)',
                 }}
                 disableGutters
@@ -1026,7 +1028,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
     };
 
     return (
-        <Box sx={{ width: '1000px', padding: '2rem' }}>
+        <Box sx={{ padding: '2rem' }}>
             <Dialog open={newConfigDialogOpen} onClose={handleCancelNewConfig}>
                 <DialogContent>
                     <DialogContentText>
