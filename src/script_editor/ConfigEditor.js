@@ -1038,7 +1038,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                     <Button onClick={handleConfirmNewConfig}>Create New Script</Button>
                 </DialogActions>
             </Dialog>
-            <Button fullWidth sx={{ mb: 3 }} onClick={handleNewConfig}>New Script</Button>
+            <Button sx={{ mb: 3 }} variant="contained" onClick={handleNewConfig}>New Script</Button>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 3 }}>
                 <TextField
                     label="Name"
@@ -1049,6 +1049,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                 <Button 
                     disabled={!username} 
                     startIcon={<SaveIcon />}
+                    variant="contained"
                     onClick={() => saveConfig(config, config.name, username)}>{username ? "Save (will clobber any of your saved scripts with the same name)" : "Choose a username to save"}
                 </Button>
             </Box>
@@ -1079,7 +1080,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                                 {config.header}
                             </Typography>
                             <Button
-                                variant="outlined"
+                                variant="contained"
                                 onClick={() => {
                                     setHeaderText(config.header || "");
                                     setEditingHeader(true);
