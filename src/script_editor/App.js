@@ -356,7 +356,9 @@ function App() {
                     display: 'flex',
                     alignItems: isMobile ? 'flex-start' : 'center',
                     flexDirection: isMobile ? 'column' : 'row',
-                    gap: '12px'
+                    gap: '12px',
+                    width: '100%',
+                    boxSizing: 'border-box'
                   }}>
                     <div style={{ 
                       display: 'flex', 
@@ -374,7 +376,8 @@ function App() {
                         fontSize: '0.9em', 
                         color: '#666',
                         paddingLeft: isMobile ? '45px' : '0',
-                        width: '100%'
+                        width: '100%',
+                        wordWrap: 'break-word'
                       }}>
                         {description}
                       </div>
@@ -398,7 +401,9 @@ function App() {
                     display: 'flex',
                     alignItems: isMobile ? 'flex-start' : 'center',
                     flexDirection: isMobile ? 'column' : 'row',
-                    gap: '12px'
+                    gap: '12px',
+                    width: '100%',
+                    boxSizing: 'border-box'
                   }}>
                     <div style={{ 
                       display: 'flex', 
@@ -416,7 +421,8 @@ function App() {
                         fontSize: '0.9em', 
                         color: '#666',
                         paddingLeft: isMobile ? '45px' : '0',
-                        width: '100%'
+                        width: '100%',
+                        wordWrap: 'break-word'
                       }}>
                         {description}
                       </div>
