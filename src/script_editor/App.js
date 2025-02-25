@@ -375,7 +375,7 @@ function App() {
                       <div style={{ 
                         fontSize: '0.9em', 
                         color: '#666',
-                        paddingLeft: isMobile ? '45px' : '0',
+                        // paddingLeft: isMobile ? '45px' : '0',
                         width: '100%',
                         wordWrap: 'break-word'
                       }}>
@@ -420,7 +420,7 @@ function App() {
                       <div style={{ 
                         fontSize: '0.9em', 
                         color: '#666',
-                        paddingLeft: isMobile ? '45px' : '0',
+                        // paddingLeft: isMobile ? '45px' : '0',
                         width: '100%',
                         wordWrap: 'break-word'
                       }}>
