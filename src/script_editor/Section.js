@@ -19,7 +19,7 @@ export function Icon({ name, section }) {
     );
 }
 
-function Character({ name, description, setupText, highlighted, isEvil, icon, section }) {
+function Character({ name, description, setupText, highlighted, isEvil, icon, section, isMobile }) {
     const borderColor = highlighted ? (isEvil ? '#a31115' : '#0083bd') : 'transparent';
     
     return <div className="character" style={{
@@ -35,14 +35,15 @@ function Character({ name, description, setupText, highlighted, isEvil, icon, se
     }}>
         <Icon name={icon} section={section} />
         <h4 style={{ 
-            minWidth: '140px',
+            minWidth: isMobile ? '70px' : '140px',
             margin: '0 10px',
-            fontSize: '1em',
+            fontSize: isMobile ? '0.8em' : '1em',
             color: '#2c3e50'
         }}>{name}</h4>
         <p style={{
             margin: '5px',
             color: '#34495e',
+            fontSize: isMobile ? '0.8em' : '1em',
         }}>
             {description}
             {setupText && <strong> [{setupText}]</strong>}
@@ -77,7 +78,7 @@ export function Header({ name }) {
     );
 }
 
-export default function Section({ name, characters, setupText, highlightedCharacters, icons }) {
+export default function Section({ name, characters, setupText, highlightedCharacters, icons, isMobile }) {
     const isEvil = name === 'Minions' || name === 'Demons';
     
     return <div style={{ 
@@ -96,6 +97,7 @@ export default function Section({ name, characters, setupText, highlightedCharac
                 isEvil={isEvil}
                 icon={icons[character.name] || character.name}
                 section={name}
+                isMobile={isMobile}
             />
         ))}
     </div>

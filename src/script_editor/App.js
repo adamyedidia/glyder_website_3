@@ -272,10 +272,10 @@ function App() {
               {header}
             </Typography>
           )}
-          <Section name="Townsfolk" characters={townsfolk.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
-          <Section name="Outsiders" characters={outsiders.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
-          <Section name="Minions" characters={minions.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
-          <Section name="Demons" characters={demons.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} />
+          <Section name="Townsfolk" characters={townsfolk.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} isMobile={isMobile} />
+          <Section name="Outsiders" characters={outsiders.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} isMobile={isMobile} />
+          <Section name="Minions" characters={minions.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} isMobile={isMobile} />
+          <Section name="Demons" characters={demons.map(([name, description]) => ({ name, description }))} setupText={setupText} highlightedCharacters={highlightedCharacters} icons={icons} isMobile={isMobile} />
         </div>
       </div>
     );
