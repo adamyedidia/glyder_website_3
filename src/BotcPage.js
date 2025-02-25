@@ -5,18 +5,33 @@ import { Typography, Button, Grid, TextField } from '@material-ui/core';
 function getColor(team) {
     return {
         'townsfolk': 'rgb(0, 100, 255)',
-        'demon': 'rgba(150, 0, 0)',
+        'demon': 'rgb(150, 0, 0)',
         'minion': 'rgb(128, 0, 128)',
         'outsider': 'rgb(0, 128, 0)',
-        'traveler': 'black',
+        'traveler': 'rgb(0, 0, 0)',
     }[team.toLowerCase()]
 }
 
-const Character = ({ id, name, team, ability, edition }) => {
+const customIcons = {
+    'Butler2': 'Generic_traveller',
+    'Marco': 'Generic_townsfolk',
+}
+
+const iconName = (name) => {
+    return customIcons[name] || `Icon_${name.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()}`
+}
+
+const Character = ({ id, name, team, ability, edition, showIcons }) => {
     let nameStyle = {
         fontSize: '1.5rem',
         fontWeight: 'bold',
         textShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+    }
+
+    let containerStyle = {
+        display: 'flex',
+        gap: '1rem',
+        height: '100%',
     }
 
     let style = {
@@ -27,32 +42,47 @@ const Character = ({ id, name, team, ability, edition }) => {
         padding: '0.5rem',
         borderRadius: '0.5rem',
         height: '100%',
+        color: 'white',
+        flex: 1,
+    }
+
+    let iconStyle = {
+        width: showIcons ? '100px' : '0',
+        height: '100%',
+        backgroundImage: showIcons ?
+            `url(/botc_icons/${iconName(name)}.png)` :
+            'none',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
     }
 
     return (
-        <div key={id} style={style}>
-            <div style={{
-                display: 'flex',
-                alignItems: 'baseline',
-            }}>
-                <Typography style={nameStyle}>{name}</Typography>
+        <div key={id} style={containerStyle}>
+            <div style={style}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                }}>
+                    <Typography style={nameStyle}>{name}</Typography>
+                </div>
+                <Typography style={{ fontSize: '1rem', height: '100%' }}>{ability}</Typography>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    marginTop: 'auto',
+                    fontSize: '0.8rem',
+                    fontStyle: 'italic',
+                }}>
+                    <Typography style={{ fontSize: '1rem', alignSelf: 'flex-start' }}>{team}</Typography>
+                    <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition || 'ø'}</Typography>
+                </div>
             </div>
-            <Typography style={{ fontSize: '1rem', height: '100%' }}>{ability}</Typography>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%',
-                marginTop: 'auto',
-                fontSize: '0.8rem',
-                fontStyle: 'italic',
-            }}>
-                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-start' }}>{team}</Typography>
-                <Typography style={{ fontSize: '1rem', alignSelf: 'flex-end' }}>{edition || 'ø'}</Typography>
-            </div>
+            <div style={iconStyle} />
         </div>
     );
 }
-
 function editionSort(edition) {
     return {
         'tb': 1,
@@ -72,8 +102,9 @@ function teamSort(team) {
 }
 
 export default function BotcPage() {
-    let [showFilters, setShowFilters] = useState(false)
-    let [sort, setSort] = useState('alphabetical')
+    let [showFilters, setShowFilters] = useState(false);
+    let [showIcons, setShowIcons] = useState(localStorage.getItem('botc-show-icons') === 'true');
+    let [sort, setSort] = useState('alphabetical');
     let [nameFilter, setNameFilter] = useState("");
     let [abilityFilter, setAbilityFilter] = useState("");
     let [reversed, setReversed] = useState(false)
@@ -90,6 +121,10 @@ export default function BotcPage() {
         'snv': true,
         'other': true,
     })
+
+    useEffect(() => {
+        localStorage.setItem('botc-show-icons', showIcons);
+    }, [showIcons]);
 
     let types = ['townsfolk', 'minion', 'demon', 'outsider', 'traveler']
 
@@ -236,11 +271,12 @@ export default function BotcPage() {
                     style={{ maxWidth: '10rem' }}
                 />}
                 <Button onClick={() => setShowFilters(!showFilters)}>{showFilters ? 'Hide' : 'Show'}</Button>
+                <Button onClick={() => setShowIcons(!showIcons)}>{showIcons ? 'Hide' : 'Show'} Icons</Button>
             </div>
             <Grid container style={{ width: '100%', justifyContent: 'flex-start', overflow: 'auto', overscrollBehavior: 'contain' }} spacing={2}>
                 {characters.map(c => (
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={c.id} style={{ marginBottom: '0.25rem' }}>
-                        <Character id={c.id} name={c.name} team={c.team} ability={c.ability} edition={c.edition} />
+                        <Character id={c.id} name={c.name} team={c.team} ability={c.ability} edition={c.edition} showIcons={showIcons} />
                     </Grid>
                 ))}
                 <Grid item xs={12} style={{ height: '200px' }}></Grid>
