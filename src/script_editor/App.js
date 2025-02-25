@@ -360,7 +360,7 @@ function App() {
                     display: 'flex',
                     alignItems: isMobile ? 'flex-start' : 'center',
                     flexDirection: isMobile ? 'column' : 'row',
-                    gap: '12px',
+                    gap: isMobile ? '4px' : '12px',
                     width: '100%',
                     boxSizing: 'border-box'
                   }}>
@@ -368,16 +368,16 @@ function App() {
                       display: 'flex', 
                       alignItems: 'center',
                       gap: '12px',
-                      width: '100%',
+                      minWidth: '35%',
                       marginBottom: isMobile ? '4px' : '0'
                     }}>
-                      <span style={{ minWidth: '30px', fontWeight: 'bold', color: '#666' }}>{index + 1}.</span>
+                      <span style={{ minWidth: '10px', fontWeight: 'bold', color: '#666' }}>{index + 1}.</span>
                       <Icon name={icons[`${name}-night`] || name} section="night" />
-                      <span style={{ fontWeight: 'bold' }}>{name}</span>
+                      <span style={{ fontWeight: 'bold', fontSize: isMobile ? '0.9em' : '1em' }}>{name}</span>
                     </div>
                     {description && (
                       <div style={{ 
-                        fontSize: '0.9em', 
+                        fontSize: isMobile ? '0.8em' : '0.9em', 
                         color: '#666',
                         // paddingLeft: isMobile ? '45px' : '0',
                         width: '100%',
@@ -412,17 +412,17 @@ function App() {
                     <div style={{ 
                       display: 'flex', 
                       alignItems: 'center',
-                      gap: '12px',
-                      width: '100%',
+                      gap: isMobile ? '4px' : '12px',
+                      minWidth: '35%',
                       marginBottom: isMobile ? '4px' : '0'
                     }}>
-                      <span style={{ minWidth: '30px', fontWeight: 'bold', color: '#666' }}>{index + 1}.</span>
+                      <span style={{ minWidth: '10px', fontWeight: 'bold', color: '#666' }}>{index + 1}.</span>
                       <Icon name={icons[`${name}-night`] || name} section="night" />
                       <span style={{ fontWeight: 'bold' }}>{name}</span>
                     </div>
                     {description && (
                       <div style={{ 
-                        fontSize: '0.9em', 
+                        fontSize: isMobile ? '0.8em' : '0.9em', 
                         color: '#666',
                         // paddingLeft: isMobile ? '45px' : '0',
                         width: '100%',
