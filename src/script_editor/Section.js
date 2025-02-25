@@ -11,7 +11,7 @@ export function Icon({ name, section }) {
                 src={`/assets/script_editor/${machinized}.png`}
                 onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = `/icons/default_${section.toLowerCase()}.png`;
+                    e.target.src = `/assets/script_editor/default_${section.toLowerCase()}.png`;
                 }}
                 alt={name} 
             />
