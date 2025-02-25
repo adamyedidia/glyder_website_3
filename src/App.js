@@ -9,6 +9,7 @@ import MagicPage from './MagicPage';
 import WordLengthPage from './WordLengthPage';
 import DejumblerPage from './DejumblerPage';
 import BotcPage from './BotcPage';
+import ScriptEditorPage from './script_editor/App';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/wordlength" element={<WordLengthPage />} />
         <Route path="/dejumbler" element={<DejumblerPage />} />
         <Route path="/botc" element={<BotcPage />} />
+        <Route path="/script-editor" element={<ScriptEditorPage />} />
         <Route path='*' element={<LandingPage />} />
         {/* <Route path="/jobs" element={<JobsPage />} /> */}
       </Routes>
