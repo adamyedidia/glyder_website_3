@@ -1,4 +1,5 @@
-const serverURL = "http://5.161.219.95:5051";
+// const serverURL = "http://5.161.219.95:5051";
+const serverURL = 'https://glydergames.com/scripts/app'
 // const serverURL = 'http://localhost:5000'
 
 export const saveConfig = async (config, configName, username) => {
