@@ -21,7 +21,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
 
   return (
     <Box sx={{ p: 2, maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
+      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '100%', sm: 'auto' } }}>
         <CardContent>
           <TextField
             fullWidth
@@ -40,7 +40,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
         </CardContent>
       </Card>
 
-      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
+      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '100%', sm: 'auto' } }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>Your Scripts</Typography>
           <Typography variant="h6" gutterBottom>Careful, loading a script will clobber any unsaved changes.</Typography>
@@ -52,21 +52,23 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                 <Card key={index} variant="outlined">
                   <CardContent sx={{ 
                     display: 'flex', 
-                    flexDirection: 'row',
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: 'space-between', 
-                    alignItems: 'center',
+                    alignItems: { xs: 'stretch', sm: 'center' },
                     gap: 2
                   }}>
-                    <Typography>{configName}</Typography>
+                    <Typography sx={{ wordBreak: 'break-word' }}>{configName}</Typography>
                     <Box sx={{ 
                       display: 'flex', 
-                      flexDirection: 'row',
-                      gap: 1
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      gap: 1,
+                      width: { xs: '100%', sm: 'auto' }
                     }}>
                       <Button
                         variant="contained"
                         color="primary"
                         onClick={() => handleLoadConfig(configName)}
+                        fullWidth
                       >
                         Load
                       </Button>
@@ -78,6 +80,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                             loadSavedConfigs();
                           })}
                         sx={{ minWidth: '140px' }}
+                        fullWidth
                       >
                         {isPublic ? 'Unpublish' : 'Publish'}
                       </Button>
@@ -90,6 +93,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                               loadSavedConfigs();
                             })
                         }}
+                        fullWidth
                       >
                         Delete
                       </Button>
@@ -102,7 +106,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
         </CardContent>
       </Card>
 
-      <Card sx={{ outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
+      <Card sx={{ outline: '2px solid black', minWidth: { xs: '100%', sm: 'auto' } }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>Public Scripts</Typography>
           {publicConfigs.length === 0 ? (
@@ -113,20 +117,21 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                 <Card key={index} variant="outlined">
                   <CardContent sx={{ 
                     display: 'flex', 
-                    flexDirection: 'row',
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: 'space-between', 
-                    alignItems: 'center',
+                    alignItems: { xs: 'stretch', sm: 'center' },
                     gap: 2
                   }}>
-                    <Typography>{configName} by {by}</Typography>
+                    <Typography sx={{ wordBreak: 'break-word' }}>{configName} by {by}</Typography>
                     <Box sx={{ 
-                      display: 'flex', 
-                      gap: 1
+                      display: 'flex',
+                      width: { xs: '100%', sm: 'auto' }
                     }}>
                       <Button
                         variant="contained"
                         color="primary"
                         onClick={() => handleLoadConfig(configName)}
+                        fullWidth
                       >
                         Load
                       </Button>
