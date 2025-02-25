@@ -20,8 +20,8 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
   }, [username]);
 
   return (
-    <Box sx={{ p: 2, maxWidth: '100%' }}>
-      <Card sx={{ mb: 3, outline: '2px solid black' }}>
+    <Box sx={{ p: 2, maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
+      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
         <CardContent>
           <TextField
             fullWidth
@@ -40,7 +40,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
         </CardContent>
       </Card>
 
-      <Card sx={{ mb: 3, outline: '2px solid black' }}>
+      <Card sx={{ mb: 3, outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>Your Scripts</Typography>
           <Typography variant="h6" gutterBottom>Careful, loading a script will clobber any unsaved changes.</Typography>
@@ -52,23 +52,21 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                 <Card key={index} variant="outlined">
                   <CardContent sx={{ 
                     display: 'flex', 
-                    flexDirection: { xs: 'column', sm: 'row' }, 
+                    flexDirection: 'row',
                     justifyContent: 'space-between', 
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: { xs: 2, sm: 0 }
+                    alignItems: 'center',
+                    gap: 2
                   }}>
-                    <Typography sx={{ mb: { xs: 1, sm: 0 } }}>{configName}</Typography>
+                    <Typography>{configName}</Typography>
                     <Box sx={{ 
                       display: 'flex', 
-                      flexDirection: { xs: 'column', sm: 'row' }, 
-                      gap: 1,
-                      width: { xs: '100%', sm: 'auto' }
+                      flexDirection: 'row',
+                      gap: 1
                     }}>
                       <Button
                         variant="contained"
                         color="primary"
                         onClick={() => handleLoadConfig(configName)}
-                        fullWidth={window.innerWidth < 600}
                       >
                         Load
                       </Button>
@@ -79,8 +77,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                           .then(() => {
                             loadSavedConfigs();
                           })}
-                        sx={{ minWidth: { sm: '140px' } }}
-                        fullWidth={window.innerWidth < 600}
+                        sx={{ minWidth: '140px' }}
                       >
                         {isPublic ? 'Unpublish' : 'Publish'}
                       </Button>
@@ -93,7 +90,6 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                               loadSavedConfigs();
                             })
                         }}
-                        fullWidth={window.innerWidth < 600}
                       >
                         Delete
                       </Button>
@@ -106,7 +102,7 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
         </CardContent>
       </Card>
 
-      <Card sx={{ outline: '2px solid black' }}>
+      <Card sx={{ outline: '2px solid black', minWidth: { xs: '600px', sm: 'auto' } }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>Public Scripts</Typography>
           {publicConfigs.length === 0 ? (
@@ -117,22 +113,20 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
                 <Card key={index} variant="outlined">
                   <CardContent sx={{ 
                     display: 'flex', 
-                    flexDirection: { xs: 'column', sm: 'row' }, 
+                    flexDirection: 'row',
                     justifyContent: 'space-between', 
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: { xs: 2, sm: 0 }
+                    alignItems: 'center',
+                    gap: 2
                   }}>
-                    <Typography sx={{ mb: { xs: 1, sm: 0 } }}>{configName} by {by}</Typography>
+                    <Typography>{configName} by {by}</Typography>
                     <Box sx={{ 
                       display: 'flex', 
-                      gap: 1,
-                      width: { xs: '100%', sm: 'auto' }
+                      gap: 1
                     }}>
                       <Button
                         variant="contained"
                         color="primary"
                         onClick={() => handleLoadConfig(configName)}
-                        fullWidth={window.innerWidth < 600}
                       >
                         Load
                       </Button>
@@ -247,7 +241,7 @@ function App() {
     };
 
     return (
-      <div style={{ width: '100%', maxWidth: '100%' }}>
+      <div style={{ width: '100%', maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Button
             variant="contained"
@@ -258,7 +252,7 @@ function App() {
             Save as PDF
           </Button>
         </div>
-        <div ref={charactersRef} style={{ width: '100%', maxWidth: '100%' }}>
+        <div ref={charactersRef} style={{ width: '100%', maxWidth: '100%', minWidth: { xs: '600px', sm: 'auto' } }}>
           {header && (
             <Typography 
               variant="h6" 
@@ -336,7 +330,7 @@ function App() {
     };
 
     return (
-      <div style={{ width: '100%', maxWidth: '100%' }}>
+      <div style={{ width: '100%', maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Button
             variant="contained"
@@ -348,7 +342,7 @@ function App() {
           </Button>
         </div>
 
-        <div ref={nightOrderRef} style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+        <div ref={nightOrderRef} style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: { xs: '600px', sm: 'auto' } }}>
           <div>
             <div style={{ textAlign: 'center', fontWeight: 'bold' }}>First Night</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
@@ -478,14 +472,17 @@ function App() {
       width: '100%',
       maxWidth: '100%',
       boxSizing: 'border-box',
+      overflowX: 'auto',
+      overflowY: 'hidden',
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '1070px'
+        maxWidth: '1070px',
+        minWidth: { xs: '600px', sm: 'auto' }
       }}>
         <ViewSelector />
       </div>
-      <div style={{ width: '100%', maxWidth: '1070px', marginBottom: '50px' }}>
+      <div style={{ width: '100%', maxWidth: '1070px', marginBottom: '50px', minWidth: { xs: '600px', sm: 'auto' } }}>
         {currentView === 'account' && <ConfigListView username={username} setUsername={setUsername} setConfig={setConfig} savedConfigs={savedConfigs} loadSavedConfigs={loadSavedConfigs} handleLoadConfig={handleLoadConfig} publicConfigs={publicConfigs} />}
         {currentView === 'characters' && <CharactersView />}
         {currentView === 'nightOrder' && <NightOrderView />}
