@@ -247,7 +247,7 @@ function App() {
 
     return (
       <div style={{ width: '100%', maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        {!isMobile && <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Button
             variant="contained"
             color="primary"
@@ -256,7 +256,7 @@ function App() {
           >
             Save as PDF
           </Button>
-        </div>
+        </div>}
         <div ref={charactersRef} style={{ width: '100%', maxWidth: '100%', minWidth: { xs: '600px', sm: 'auto' } }}>
           {header && (
             <Typography 
@@ -266,7 +266,6 @@ function App() {
                 textAlign: 'center', 
                 width: '100%', 
                 maxWidth: '100%',
-                px: 2
               }} 
               whiteSpace="pre-wrap"
             >
@@ -336,7 +335,7 @@ function App() {
 
     return (
       <div style={{ width: '100%', maxWidth: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+        {!isMobile && <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
           <Button
             variant="contained"
             color="primary"
@@ -345,7 +344,7 @@ function App() {
           >
             Save as PDF
           </Button>
-        </div>
+        </div>}
 
         <div ref={nightOrderRef} style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', minWidth: { xs: '600px', sm: 'auto' } }}>
           <div>
