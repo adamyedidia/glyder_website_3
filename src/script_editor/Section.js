@@ -52,7 +52,7 @@ function Character({ name, description, setupText, highlighted, isEvil, icon, se
 }
 
 export function Header({ name }) {
-    let color = ['Townsfolk', 'Outsiders', 'Minions', 'Demons'].includes(name) ? 'blue' : 'red';
+    let color = ['Townsfolk', 'Outsiders'].includes(name) ? 'blue' : 'red';
     return (
         <div style={{
             width: '100%',
