@@ -52,6 +52,7 @@ function Character({ name, description, setupText, highlighted, isEvil, icon, se
 }
 
 export function Header({ name }) {
+    let color = ['Townsfolk', 'Outsiders', 'Minions', 'Demons'].includes(name) ? 'blue' : 'red';
     return (
         <div style={{
             width: '100%',
@@ -60,8 +61,8 @@ export function Header({ name }) {
             alignItems: 'center',
             justifyContent: 'center',
             margin: '6px 0',
-            borderTop: '2px solid #e74c3c',
-            borderBottom: '2px solid #e74c3c'
+            borderTop: `2px solid ${color}`,
+            borderBottom: `2px solid ${color}`
         }}>
             <div style={{
                 backgroundColor: 'white',
