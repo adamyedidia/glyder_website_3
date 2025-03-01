@@ -227,7 +227,6 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
 
     // Function to update a character's ability
     const updateCharacter = (section, name, value, setupTextValue = null, iconName = null, newName = null) => {
-        console.log(section, name, value, setupTextValue, iconName, newName);
         setConfig(prev => {
             const characters = [...prev[section]];
             const index = characters.findIndex(([charName]) => charName === name);
@@ -262,11 +261,13 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
                 if (iconName.trim() === "") {
                     const newIcons = { ...newConfig.icons };
                     delete newIcons[name];
+                    delete newIcons[`${name}-night`];
                     newConfig.icons = newIcons;
                 } else {
                     newConfig.icons = {
                         ...newConfig.icons,
-                        [name]: iconName
+                        [name]: iconName,
+                        [`${name}-night`]: iconName
                     };
                 }
             }
