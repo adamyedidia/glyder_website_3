@@ -148,9 +148,42 @@ function ConfigListView({ username, setUsername, savedConfigs, loadSavedConfigs,
 }
 
 function App() {
-  const [config, setConfig] = useState(() => {
-    return configs[localStorage.getItem('selectedConfig')] || configs['FortunateSon'];
-  });
+  // Parse URL parameters
+  const params = new URLSearchParams(window.location.search);
+  const configFromUrl = params.get('config');
+  const byFromUrl = params.get('by');
+
+  const [loading, setLoading] = useState(true);
+  const [config, setConfig] = useState(configs[localStorage.getItem('selectedConfig')] || configs['FortunateSon']);
+  const [toast, setToast] = useState(null);
+
+  function showToast(message, isError = false, timeout = 3000) {
+    setToast({ message, isError });
+    setTimeout(() => setToast(null), timeout);
+  }
+
+  useEffect(() => {
+    if (configFromUrl && byFromUrl) {
+      loadConfig(configFromUrl, byFromUrl)
+        .then(config => {
+          if (config.error) {
+            showToast(config.error, true);
+            setLoading(false);
+          } else {
+            setConfig(config);
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          showToast('Failed to load script from URL', true);
+          setLoading(false);
+        });
+    }
+    else {
+      setLoading(false);
+    }
+  }, [configFromUrl, byFromUrl]);
+  
   const [currentView, setCurrentView] = useState('characters');
   const [username, setUsername] = useState(localStorage.getItem('script_editor_username') || '');
   const [savedConfigs, setSavedConfigs] = useState([]);
@@ -202,11 +235,16 @@ function App() {
   function handleLoadConfig(configName, by = username) {
     loadConfig(configName, by)
       .then(config => {
-        setConfig(config);
-        localStorage.setItem('selectedConfig', configName);
+        if (config.error) {
+          showToast(config.error, true);
+        } else {
+          setConfig(config);
+          showToast(`Loaded ${configName}`, false);
+          localStorage.setItem('selectedConfig', configName);
+        }
       })
       .catch(err => {
-        console.error('Failed to load config:', err);
+        showToast('Failed to load script?', true);
       });
   }
 
@@ -280,6 +318,7 @@ function App() {
       </div>
     );
   }
+
   const NightOrderView = () => {
     const handlePrint = () => {
       const element = nightOrderRef.current;
@@ -472,6 +511,10 @@ function App() {
     </div>
   );
 
+  if (loading) {
+    return null;
+  }
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -485,6 +528,22 @@ function App() {
       overflowX: 'auto',
       overflowY: 'hidden',
     }}>
+      {toast && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: toast.isError ? '#f44336' : '#4caf50',
+          color: 'white',
+          padding: '10px 20px',
+          borderRadius: '4px',
+          zIndex: 1000,
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+        }}>
+          {toast.message}
+        </div>
+      )}
       <div style={{
         width: '100%',
         maxWidth: '1070px',
@@ -501,4 +560,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

@@ -71,7 +71,11 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                     e.preventDefault();
                     if (editingItem) {
                         const [section, name] = editingItem.split('-');
-                        updateCharacter(section, name, newItemValue, newSetupText, newIconName);
+                        if (section === 'firstNightOrder' || section === 'otherNightOrder') {
+                            updateOrderItem(section, name, newItemName, newIconName);
+                        } else {
+                            updateCharacter(section, name, newItemValue, newSetupText, newIconName, newItemName);
+                        }
                     } else if (editingSection) {
                         if (editingSection === 'firstNightOrder' || editingSection === 'otherNightOrder') {
                             addToOrder(editingSection, newItemName);
@@ -222,12 +226,17 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
     };
 
     // Function to update a character's ability
-    const updateCharacter = (section, name, value, setupTextValue = null, iconName = null) => {
+    const updateCharacter = (section, name, value, setupTextValue = null, iconName = null, newName = null) => {
+        console.log(section, name, value, setupTextValue, iconName, newName);
         setConfig(prev => {
             const characters = [...prev[section]];
             const index = characters.findIndex(([charName]) => charName === name);
             if (index !== -1) {
-                characters[index] = [name, value];
+                if (newName) {
+                    characters[index] = [newName, value];
+                } else {
+                    characters[index] = [name, value];
+                }
             }
 
             const newConfig = {
@@ -528,7 +537,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                                                     <Button
                                                         variant="contained"
                                                         startIcon={<SaveIcon />}
-                                                        onClick={() => updateCharacter(section, name, newItemValue, newSetupText, newIconName)}
+                                                        onClick={() => updateCharacter(section, name, newItemValue, newSetupText, newIconName, newItemName)}
                                                         sx={{
                                                             backgroundColor: theme.palette.primary.main,
                                                             color: theme.palette.primary.contrastText
