@@ -555,7 +555,7 @@ function App() {
         {currentView === 'account' && <ConfigListView username={username} setUsername={setUsername} setConfig={setConfig} savedConfigs={savedConfigs} loadSavedConfigs={loadSavedConfigs} handleLoadConfig={handleLoadConfig} publicConfigs={publicConfigs} />}
         {currentView === 'characters' && <CharactersView />}
         {currentView === 'nightOrder' && <NightOrderView />}
-        {currentView === 'scriptEditor' && <ConfigEditor config={config} setConfig={setConfig} saveConfig={saveConfig} username={username} />}
+        {currentView === 'scriptEditor' && <ConfigEditor config={config} setConfig={setConfig} saveConfig={saveConfig} username={username} showToast={showToast} />}
       </div>
     </div>
   );

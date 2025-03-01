@@ -39,7 +39,7 @@ import {
     Star as StarIcon
 } from '@mui/icons-material';
 
-const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
+const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) => {
     const theme = useTheme();
     const [editingSection, setEditingSection] = useState(null);
     const [editingItem, setEditingItem] = useState(null);
@@ -1061,7 +1061,17 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username }) => {
                     disabled={!username} 
                     startIcon={<SaveIcon />}
                     variant="contained"
-                    onClick={() => saveConfig(config, config.name, username)}>{username ? "Save (will clobber any of your saved scripts with the same name)" : "Choose a username to save"}
+                    onClick={() => {
+                        saveConfig(config, config.name, username)
+                            .then(() => {
+                                showToast(`Saved ${config.name}`, false);
+                            })
+                            .catch(() => {
+                                showToast(`Failed to save ${config.name}`, true);
+                            });
+                    }}
+                >
+                    {username ? "Save (will clobber any of your saved scripts with the same name)" : "Choose a username to save"}
                 </Button>
             </Box>
             <Card sx={{ mb: 3, boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.5)' }}>
