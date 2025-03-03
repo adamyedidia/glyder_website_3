@@ -987,6 +987,7 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
                                         label="Icon Name"
                                         value={newIconName}
                                         onChange={(e) => setNewIconName(e.target.value)}
+                                        placeholder="append -swapped for red/blue swapped version"
                                         fullWidth
                                     />
                                     <Box sx={{ display: 'flex', gap: 1 }}>
