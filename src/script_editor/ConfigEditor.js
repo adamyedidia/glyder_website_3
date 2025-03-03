@@ -243,15 +243,17 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
                 [section]: characters
             };
 
+            const effectiveName = newName || name;
+
             if (setupTextValue !== null) {
                 if (setupTextValue.trim() === "") {
                     const newSetupText = { ...prev.setupText };
-                    delete newSetupText[name];
+                    delete newSetupText[effectiveName];
                     newConfig.setupText = newSetupText;
                 } else {
                     newConfig.setupText = {
                         ...prev.setupText,
-                        [name]: setupTextValue
+                        [effectiveName]: setupTextValue
                     };
                 }
             }
@@ -260,14 +262,14 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
                 if (!newConfig.icons) newConfig.icons = {};
                 if (iconName.trim() === "") {
                     const newIcons = { ...newConfig.icons };
-                    delete newIcons[name];
-                    delete newIcons[`${name}-night`];
+                    delete newIcons[effectiveName];
+                    delete newIcons[`${effectiveName}-night`];
                     newConfig.icons = newIcons;
                 } else {
                     newConfig.icons = {
                         ...newConfig.icons,
-                        [name]: iconName,
-                        [`${name}-night`]: iconName
+                        [effectiveName]: iconName,
+                        [`${effectiveName}-night`]: iconName
                     };
                 }
             }
@@ -299,7 +301,8 @@ const ConfigEditor = ({ config, setConfig, saveConfig, username, showToast }) =>
                 if (!newConfig.icons) newConfig.icons = {};
                 newConfig.icons = {
                     ...newConfig.icons,
-                    [newItemName]: newIconName
+                    [newItemName]: newIconName,
+                    [`${newItemName}-night`]: newIconName
                 };
             }
 

@@ -256,7 +256,7 @@ function App() {
       const pdf = new jsPDF('p', 'pt', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      const margin = 40;
+      const margin = 20;
       const contentWidth = pdfWidth - (margin * 2);
 
       html2canvas(element, {
@@ -327,7 +327,7 @@ function App() {
       const pdf = new jsPDF('p', 'pt', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      const margin = 40;
+      const margin = 20;
       const contentWidth = pdfWidth - (margin * 2);
 
       html2canvas(element, {
